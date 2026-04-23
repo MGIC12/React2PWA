@@ -1,7 +1,8 @@
 import Favoritos from "./Pages/Favoritos";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home";
-import Error404 from "./Pages/Error404";import "./App.css";
+import Error404 from "./Pages/Error404";
+import "./App.css";
 import Footer from "./Components/Footer";
 
 function App() {
