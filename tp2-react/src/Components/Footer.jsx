@@ -21,11 +21,11 @@ export default function Footer({ links = [], social = [] }) {
           
           {/* Sección Izquierda - Info de la Empresa */}
           <div className="footer-left">
-            <h3 className="text-xl font-bold mb-4">Todo Música</h3>
+            <h3 className="text-xl font-bold mb-4">Todo Hardware</h3>
             <p className="text-gray-400 text-sm leading-relaxed">
-              Una aplicación web moderna que te permite explorar los instrumentos y guardar tus favoritos.
+              Una aplicación web moderna que te permite explorar los mejores productos de hardware y guardar tus favoritos.
             </p>
-            <p className="text-gray-500 text-xs mt-4">© 2026 TodoMúsica. Todos los derechos reservados.</p>
+            <p className="text-gray-500 text-xs mt-4">© 2026 TodoHardware. Todos los derechos reservados.</p>
           </div>
 
           {/* Sección Centro - Links de Navegación */}
@@ -65,9 +65,9 @@ export default function Footer({ links = [], social = [] }) {
             {/* Información de Contacto */}
             <div className="border-t border-gray-700 pt-4 mt-4">
               <p className="text-gray-400 text-sm">
-                <span className="block">📧 info@todomusica.com</span>
-                <span className="block mt-1">📱 +54 11 5544-8000</span>
-                <span className="block mt-1">📍 Martin Garcia 436 Ciudad de Buenos Aires, Argentina</span>
+                <span className="block">📧 info@todohardware.com</span>
+                <span className="block mt-1">📱 +54 11 5544-8880</span>
+                <span className="block mt-1">📍 Martin Garcia 426 Ciudad de Buenos Aires, Argentina</span>
               </p>
             </div>
           </div>
