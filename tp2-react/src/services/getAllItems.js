@@ -10,7 +10,7 @@ export const getAllItems = async (page = 1) => {
     // Agregamos el parámetro de límite para limitar la cantidad de items
     url.searchParams.append("limit", 12);
 
-    // Agregamos el parámetro de búsqueda en caso de que se haya ingresado algo en el input
+    // Agregamos el parámetro de búsqueda en caso de que se haya ingresado algo en el inputo
     // if (search) {
     //   url.searchParams.append("name", search);
     // }

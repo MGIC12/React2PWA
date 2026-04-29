@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../Components/Header/Header";
 import BarraBusqueda from "../Components/BarraBusqueda/BarraBusqueda";
+import { getAllItems } from "../services/getAllItems";
+import TarjetaComponente from "../Components/tarjetaComponente/TarjetaComponente";
 
 
 export default function Home() {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    const fetchItems = async () => {
+      const data = await getAllItems();
+      setItems(data);
+    };
+    fetchItems();
+  }, []);
+
   return <div className="text-3xl font-bold">
     <Header />
     <div class="flex mt-10 w-full items-center justify-center bg-zinc-900">
@@ -25,11 +37,17 @@ export default function Home() {
         ">
         <BarraBusqueda></BarraBusqueda>
         <div class="grid grid-cols-4 gap-4 mt-10">
+          {items.map((item) => (
+            <TarjetaComponente
+              item={item}
+            />
+          ))}
           
         </div>
       </div>
-
     </div>
   </div>;
+
+
 
 }
