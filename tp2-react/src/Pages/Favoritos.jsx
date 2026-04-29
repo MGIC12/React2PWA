@@ -27,8 +27,9 @@ export default function Favoritos() {
     )
   }
   return (
-    <div className="bg-gray-900 min-h-screen pb-32">
+    <div className="min-h-screen flex flex-col bg-gray-900">
       <Header />
+      <h1 className="text-3xl font-bold text-white p-6">Favoritos</h1>
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {favorites.map((item) => (
           <div

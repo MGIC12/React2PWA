@@ -3,6 +3,7 @@ import Home from "./Pages/Home";
 import Favoritos from "./Pages/Favoritos";
 import Contacto from "./Pages/Contacto";
 import Acerca from "./Pages/Acerca";
+import Detalles from "./Pages/Detalles";
 import Error404 from "./Pages/Error404";
 import "./App.css";
 
@@ -12,7 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/favoritos" element={<Favoritos />} />
-        {/* <Route path="/detalles/:id" element={<Detalles />} /> */}
+        <Route path="/items/:id" element={<Detalles />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/acerca" element={<Acerca />} />
         <Route path="*" element={<Error404 />} />
