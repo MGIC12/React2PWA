@@ -22,11 +22,14 @@ export default function Home() {
         shadow-[0px_0px_40px_-12px_rgba(255,255,255,0.25)] 
         w-3/4 h-1/1
         mt-30
-      ">
+        ">
         <BarraBusqueda></BarraBusqueda>
-  </div>
+        <div class="grid grid-cols-4 gap-4 mt-10">
+          
+        </div>
+      </div>
 
-</div>
+    </div>
   </div>;
 
 }
