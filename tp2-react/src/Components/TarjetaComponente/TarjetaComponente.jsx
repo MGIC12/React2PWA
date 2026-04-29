@@ -1,11 +1,7 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
 
 export default function ComponentCard({ item }) {
   return (
-    
-    <navlink to={`/items/${item.id}`}
-    >
         <div
         className="w-[280px] bg-[#0c0c14] border border-[#1e1e30] rounded-sm overflow-hidden cursor-pointer transition-all duration-250 hover:border-[#00e5ff] hover:-translate-y-1"
         style={{ fontFamily: "'Syne', sans-serif" }}
@@ -13,7 +9,7 @@ export default function ComponentCard({ item }) {
         <div className="relative w-full h-[150px] bg-[#0a0a12] border-b border-[#1e1e30] flex items-center justify-center">
             <img
             src={item.image}
-            alt={item.name}
+            alt= {""}
             className="max-w-[80%] max-h-[110px] object-contain"
             style={{ filter: "drop-shadow(0 0 12px rgba(0,229,255,0.15))" }}
             />
@@ -68,6 +64,5 @@ export default function ComponentCard({ item }) {
             </div>
         </div>
         </div>
-    </navlink>
   );
 }

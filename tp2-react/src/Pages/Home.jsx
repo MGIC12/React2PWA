@@ -3,6 +3,7 @@ import Header from "../Components/Header/Header";
 import BarraBusqueda from "../Components/BarraBusqueda/BarraBusqueda";
 import { getAllItems } from "../services/getAllItems";
 import TarjetaComponente from "../Components/tarjetaComponente/TarjetaComponente";
+import { Link } from "react-router-dom";
 
 
 export default function Home() {
@@ -27,20 +28,19 @@ export default function Home() {
     </div>
     <div class="flex h-screen w-full items-center justify-center bg-zinc-900">
       <div class="
-        bg-zinc-700 
-        rounded-xl 
-        border border-gray-500 
         p-8 
-        shadow-[0px_0px_40px_-12px_rgba(255,255,255,0.25)] 
         w-3/4 h-1/1
         mt-30
         ">
         <BarraBusqueda></BarraBusqueda>
         <div class="grid grid-cols-4 gap-4 mt-10">
           {items.map((item) => (
-            <TarjetaComponente
-              item={item}
-            />
+            <Link to={`/items/${item.id}`}>
+              <TarjetaComponente
+                item={item}
+                key={item.id}
+              />
+            </Link>
           ))}
           
         </div>
