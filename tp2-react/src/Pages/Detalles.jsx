@@ -10,14 +10,12 @@ export default function Detalles() {
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error404, setError404] = useState(false);
-
-  // Nuevo estado para controlar si la imagen se rompe
   const [errorImagen, setErrorImagen] = useState(false);
 
   useEffect(() => {
     const obtenerDatos = async () => {
       setCargando(true);
-      setErrorImagen(false); // Reseteamos el error por si navegamos a otro producto
+      setErrorImagen(false);
       const data = await getItemById(id);
 
       if (!data) {
@@ -72,12 +70,10 @@ export default function Detalles() {
             </Link>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-              {/* CONTENEDOR DE IMAGEN (Con min-height por si falla la imagen) */}
               <div className="min-h-75 lg:min-h-100 bg-white/5 border border-white/10 rounded-2xl p-10 flex items-center justify-center backdrop-blur-sm shadow-2xl relative">
                 <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#00e5ff]/50 rounded-tl-xl m-4"></div>
                 <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#00e5ff]/50 rounded-br-xl m-4"></div>
 
-                {/* Lógica de Error de Imagen */}
                 {errorImagen ? (
                   <div className="flex flex-col items-center justify-center text-[#5a5a78]">
                     <svg
