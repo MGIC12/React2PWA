@@ -10,10 +10,12 @@ export default function Detalles() {
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
   const [error404, setError404] = useState(false);
+  const [errorImagen, setErrorImagen] = useState(false);
 
   useEffect(() => {
     const obtenerDatos = async () => {
       setCargando(true);
+      setErrorImagen(false);
       const data = await getItemById(id);
 
       if (!data) {
@@ -68,15 +70,46 @@ export default function Detalles() {
             </Link>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-              <div className="bg-white/5 border border-white/10 rounded-2xl p-10 flex items-center justify-center backdrop-blur-sm shadow-2xl relative">
+              <div className="min-h-75 lg:min-h-100 bg-white/5 border border-white/10 rounded-2xl p-10 flex items-center justify-center backdrop-blur-sm shadow-2xl relative">
                 <div className="absolute top-0 left-0 w-8 h-8 border-t-2 border-l-2 border-[#00e5ff]/50 rounded-tl-xl m-4"></div>
                 <div className="absolute bottom-0 right-0 w-8 h-8 border-b-2 border-r-2 border-[#00e5ff]/50 rounded-br-xl m-4"></div>
 
-                <img
-                  src={producto.image}
-                  alt={producto.name}
-                  className="max-w-full h-auto object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.15)]"
-                />
+                {errorImagen ? (
+                  <div className="flex flex-col items-center justify-center text-[#5a5a78]">
+                    <svg
+                      className="w-16 h-16 opacity-50 mb-4"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={1.5}
+                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                      />
+                      <line
+                        x1="3"
+                        y1="3"
+                        x2="21"
+                        y2="21"
+                        stroke="currentColor"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                      />
+                    </svg>
+                    <span className="text-sm font-bold tracking-widest uppercase">
+                      Sin Señal Visual
+                    </span>
+                  </div>
+                ) : (
+                  <img
+                    src={producto.image}
+                    alt={producto.name}
+                    className="max-w-full h-auto object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.15)]"
+                    onError={() => setErrorImagen(true)}
+                  />
+                )}
               </div>
 
               <div className="flex flex-col">
@@ -124,9 +157,9 @@ export default function Detalles() {
                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                       />
                     </svg>
-                    <Link 
-                      to={`https://listado.mercadolibre.com.ar/${encodeURIComponent(producto.name)}`} 
-                      target="_blank" 
+                    <Link
+                      to={`https://listado.mercadolibre.com.ar/${encodeURIComponent(producto.name)}`}
+                      target="_blank"
                       rel="noopener noreferrer"
                     >
                       <span className="hidden md:inline text-sm">
