@@ -6,12 +6,16 @@ export default function Favoritos() {
   const [favorites, setFavorites] = useState([]);
 
   useEffect(() => {
-    const storedFav= JSON.parse(localStorage.getItem("favorites")) || [];
+    const storedFav = JSON.parse(localStorage.getItem("favorites")) || [];
     setFavorites(storedFav);
   }, []);
 
+  useEffect(() => {
+    document.title = "Favoritos";
+  }, []);
+
   if (favorites.length === 0) {
-    return(
+    return (
       <div className="min-h-screen bg-gray-900">
         <Header />
         <div className="flex flex-col items-center justify-center min-h-[70vh]">
@@ -24,7 +28,7 @@ export default function Favoritos() {
         </div>
         <Footer />
       </div>
-    )
+    );
   }
   return (
     <div className="min-h-screen flex flex-col bg-gray-900">
@@ -33,15 +37,17 @@ export default function Favoritos() {
       <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {favorites.map((item) => (
           <div
-          key={item.id}
-          className="bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-lg transition border border-gray-700 hover:border-cyan-400"
+            key={item.id}
+            className="bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-lg transition border border-gray-700 hover:border-cyan-400"
           >
             <img
               src={item.coverImage}
               alt={item.name}
-              className="w-full h-48 object-cover rounded-md" 
+              className="w-full h-48 object-cover rounded-md"
             />
-            <h3 className="text-lg font-semibold mt-2 text-white">{item.name}</h3>
+            <h3 className="text-lg font-semibold mt-2 text-white">
+              {item.name}
+            </h3>
             <p className="text-sm text-gray-400">{item.description}</p>
           </div>
         ))}

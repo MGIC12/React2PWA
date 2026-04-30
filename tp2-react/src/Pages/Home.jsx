@@ -25,6 +25,10 @@ export default function Home() {
     fetchItems();
   }, []);
 
+  useEffect(() => {
+    document.title = "Home";
+  }, []);
+
   return (
     <div
       className="min-h-screen flex flex-col bg-[#050508]"
