@@ -1,6 +1,6 @@
 import { API_BASE_URL } from "./apiConfig";
 
-export const getAllItems = async (page = 1) => {
+export const getAllItems = async (page = 1, search) => {
   try {
     const url = new URL(API_BASE_URL);
 
@@ -11,9 +11,9 @@ export const getAllItems = async (page = 1) => {
     url.searchParams.append("limit", 12);
 
     // Agregamos el parámetro de búsqueda en caso de que se haya ingresado algo en el input
-    // if (search) {
-    //   url.searchParams.append("name", search);
-    // }
+     if (search) {
+       url.searchParams.append("name", search);
+     }
 
     const response = await fetch(url.toString());
 
