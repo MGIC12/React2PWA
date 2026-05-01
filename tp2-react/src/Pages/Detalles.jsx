@@ -11,6 +11,7 @@ export default function Detalles() {
   const [cargando, setCargando] = useState(true);
   const [error404, setError404] = useState(false);
   const [errorImagen, setErrorImagen] = useState(false);
+  const [esFavorito, setEsFavorito] = useState(false);
 
   useEffect(() => {
     const obtenerDatos = async () => {
@@ -22,13 +23,33 @@ export default function Detalles() {
         setError404(true);
       } else {
         setProducto(data);
+        const favoritosGuardados =
+          JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+        const existe = favoritosGuardados.some((fav) => fav.id === data.id);
+        setEsFavorito(existe);
       }
       setCargando(false);
     };
 
     obtenerDatos();
-    document.title = "Detalles del producto";
+    document.title = "NEXUS - Ficha Técnica";
   }, [id]);
+
+  const toggleFavorito = () => {
+    let favoritosGuardados =
+      JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+
+    if (esFavorito) {
+      favoritosGuardados = favoritosGuardados.filter(
+        (fav) => fav.id !== producto.id,
+      );
+      setEsFavorito(false);
+    } else {
+      favoritosGuardados.push(producto);
+      setEsFavorito(true);
+    }
+    localStorage.setItem("nexus_favoritos", JSON.stringify(favoritosGuardados));
+  };
 
   if (error404) return <Error404 />;
 
@@ -126,9 +147,16 @@ export default function Detalles() {
                 </div>
 
                 <div className="flex flex-col sm:flex-row items-center gap-4 mb-10 pb-10 border-b border-white/10">
-                  <button className="w-full sm:w-auto grow bg-transparent border-2 border-[#00e5ff] hover:bg-[#00e5ff] text-[#00e5ff] hover:text-black font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 group">
+                  <button
+                    onClick={toggleFavorito}
+                    className={`w-full sm:w-auto grow border-2 border-[#00e5ff] font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 group ${
+                      esFavorito
+                        ? "bg-[#00e5ff] text-black hover:bg-transparent hover:text-[#00e5ff]"
+                        : "bg-transparent text-[#00e5ff] hover:bg-[#00e5ff] hover:text-black"
+                    }`}
+                  >
                     <svg
-                      className="w-6 h-6 group-hover:scale-110 transition-transform"
+                      className={`w-6 h-6 group-hover:scale-110 transition-transform ${esFavorito ? "fill-current" : ""}`}
                       fill="none"
                       viewBox="0 0 24 24"
                       stroke="currentColor"
@@ -140,7 +168,9 @@ export default function Detalles() {
                         d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                       />
                     </svg>
-                    GUARDAR EN FAVORITOS
+                    {esFavorito
+                      ? "QUITAR DE FAVORITOS"
+                      : "GUARDAR EN FAVORITOS"}
                   </button>
 
                   <button className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-3">
@@ -168,6 +198,7 @@ export default function Detalles() {
                     </Link>
                   </button>
                 </div>
+
                 <div className="space-y-8">
                   <section>
                     <h3 className="text-[#00e5ff] uppercase tracking-widest text-xs font-bold mb-3 flex items-center gap-2">

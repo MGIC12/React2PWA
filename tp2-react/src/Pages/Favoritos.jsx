@@ -1,57 +1,94 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import TarjetaComponente from "../Components/TarjetaComponente/TarjetaComponente";
 
 export default function Favoritos() {
-  const [favorites, setFavorites] = useState([]);
+  const [favoritos, setFavoritos] = useState([]);
 
   useEffect(() => {
-    const storedFav = JSON.parse(localStorage.getItem("favorites")) || [];
-    setFavorites(storedFav);
+    const favoritosGuardados =
+      JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+    setFavoritos(favoritosGuardados);
+    document.title = "NEXUS - Favoritos";
   }, []);
 
-  useEffect(() => {
-    document.title = "Favoritos";
-  }, []);
+  return (
+    <div
+      className="min-h-screen flex flex-col bg-[#050508]"
+      style={{ fontFamily: "'Inter', sans-serif" }}
+    >
+      <Header />
 
-  if (favorites.length === 0) {
-    return (
-      <div className="min-h-screen bg-gray-900">
-        <Header />
-        <div className="flex flex-col items-center justify-center min-h-[70vh]">
-          <h2 className="text-2xl font-bold text-white">
-            No hay favoritos todavía
-          </h2>
-          <p className="text-gray-400 mt-2">
-            Agrega elementos desde la página principal.
+      <main className="grow container mx-auto px-6 md:px-10 py-12 flex flex-col items-center">
+        <div className="w-full text-center mb-16 border-b border-white/10 pb-10">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-white tracking-wider flex items-center justify-center gap-4">
+            <svg
+              className="w-10 h-10 text-[#00e5ff] fill-current"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={2}
+                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+              />
+            </svg>
+            TUS <span className="text-[#00e5ff]">FAVORITOS</span>
+          </h1>
+          <p className="text-white/60 mt-4 tracking-widest uppercase text-sm font-bold">
+            Tu build personalizada guardada localmente
           </p>
         </div>
-        <Footer />
-      </div>
-    );
-  }
-  return (
-    <div className="min-h-screen flex flex-col bg-gray-900">
-      <Header />
-      <h1 className="text-3xl font-bold text-white p-6">Favoritos</h1>
-      <div className="p-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
-        {favorites.map((item) => (
-          <div
-            key={item.id}
-            className="bg-gray-800 rounded-lg shadow-md p-4 hover:shadow-lg transition border border-gray-700 hover:border-cyan-400"
-          >
-            <img
-              src={item.coverImage}
-              alt={item.name}
-              className="w-full h-48 object-cover rounded-md"
-            />
-            <h3 className="text-lg font-semibold mt-2 text-white">
-              {item.name}
-            </h3>
-            <p className="text-sm text-gray-400">{item.description}</p>
+
+        {favoritos.length === 0 ? (
+          <div className="flex flex-col items-center justify-center mt-10 text-center max-w-md">
+            <div className="w-20 h-20 bg-white/5 border border-white/10 rounded-full flex items-center justify-center mb-6">
+              <svg
+                className="w-10 h-10 text-white/20"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1}
+                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+                />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold text-white mb-2">Archivo Vacío</h3>
+            <p className="text-white/50 text-sm leading-relaxed mb-6">
+              Aún no has guardado ningún componente en tu lista de seguimiento.
+              Explora el catálogo para armar tu setup.
+            </p>
+            <Link
+              to="/"
+              className="bg-[#00e5ff]/10 border border-[#00e5ff]/30 text-[#00e5ff] hover:bg-[#00e5ff] hover:text-black font-bold py-3 px-8 rounded-lg transition-all uppercase tracking-widest text-xs"
+            >
+              Explorar Catálogo
+            </Link>
           </div>
-        ))}
-      </div>
+        ) : (
+          <div className="w-full max-w-7xl">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
+              {favoritos.map((item) => (
+                <Link
+                  to={`/items/${item.id}`}
+                  key={item.id}
+                  className="block h-full"
+                >
+                  <TarjetaComponente item={item} />
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+      </main>
+
       <Footer />
     </div>
   );
