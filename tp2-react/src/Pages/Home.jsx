@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import BarraBusqueda from "../Components/BarraBusqueda/BarraBusqueda";
-import TarjetaComponente from "../Components/tarjetaComponente/TarjetaComponente";
+import TarjetaComponente from "../Components/TarjetaComponente/TarjetaComponente";
 import { getAllItems } from "../services/getAllItems";
 import { Link } from "react-router-dom";
 
@@ -13,7 +13,7 @@ export default function Home() {
   const [page, setPage] = useState(1);
 
   const handleSearch = (valorDesdeHijo) => {
-    setPage(1); 
+    setPage(1);
     setSearch(valorDesdeHijo);
   };
 
@@ -35,7 +35,6 @@ export default function Home() {
   useEffect(() => {
     document.title = "Home";
   }, []);
-  
 
   return (
     <div
@@ -55,9 +54,7 @@ export default function Home() {
       </div>
       <main className="grow container mx-auto px-6 md:px-10 py-12 flex flex-col items-center">
         <div className="w-full max-w-3xl mb-12">
-          <BarraBusqueda 
-          onSearch={handleSearch} />
-
+          <BarraBusqueda onSearch={handleSearch} />
         </div>
         {cargando ? (
           <div className="flex flex-col items-center justify-center mt-20">
