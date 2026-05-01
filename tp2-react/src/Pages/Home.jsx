@@ -2,19 +2,26 @@ import React, { useEffect, useState } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import BarraBusqueda from "../Components/BarraBusqueda/BarraBusqueda";
-import TarjetaComponente from "../Components/TarjetaComponente/TarjetaComponente";
+import TarjetaComponente from "../Components/tarjetaComponente/TarjetaComponente";
 import { getAllItems } from "../services/getAllItems";
 import { Link } from "react-router-dom";
 
 export default function Home() {
   const [items, setItems] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const [search, setSearch] = useState("");
+  const [page, setPage] = useState(1);
+
+  const handleSearch = (valorDesdeHijo) => {
+    setPage(1); 
+    setSearch(valorDesdeHijo);
+  };
 
   useEffect(() => {
-    const fetchItems = async () => {
+    const fetchItems = async (page, search) => {
       setCargando(true);
       try {
-        const data = await getAllItems();
+        const data = await getAllItems(page, search);
         setItems(data);
       } catch (error) {
         console.error("Error al cargar los items:", error);
@@ -22,12 +29,13 @@ export default function Home() {
         setCargando(false);
       }
     };
-    fetchItems();
-  }, []);
+    fetchItems(page, search);
+  }, [page, search]);
 
   useEffect(() => {
     document.title = "Home";
   }, []);
+  
 
   return (
     <div
@@ -47,7 +55,9 @@ export default function Home() {
       </div>
       <main className="grow container mx-auto px-6 md:px-10 py-12 flex flex-col items-center">
         <div className="w-full max-w-3xl mb-12">
-          <BarraBusqueda />
+          <BarraBusqueda 
+          onSearch={handleSearch} />
+
         </div>
         {cargando ? (
           <div className="flex flex-col items-center justify-center mt-20">

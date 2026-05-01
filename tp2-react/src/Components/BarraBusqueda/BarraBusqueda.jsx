@@ -3,6 +3,16 @@ import React, { useState } from "react";
 export default function BarraBusqueda({ onSearch }) {
   const [query, setQuery] = useState("");
 
+  const handleChange = (e) => {
+    const value = e.target.value;
+    setQuery(value);
+    
+    // Llamamos a la función del padre cada vez que cambia el texto
+    if (onSearch) {
+      onSearch(value); 
+    }
+  };
+
   const manejoSubmit = (e) => {
     e.preventDefault();
     if (onSearch) {
@@ -35,15 +45,9 @@ export default function BarraBusqueda({ onSearch }) {
         type="text"
         placeholder="Buscar por ID, nombre o categoría..."
         value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        onChange={handleChange}
         className="w-full h-14 pl-12 pr-28 bg-[#0c0c14] border border-[#1e1e30] text-white rounded-lg focus:outline-none focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff] transition-all placeholder:text-white/30 shadow-[0_0_15px_rgba(0,0,0,0.3)]"
       />
-      <button
-        type="submit"
-        className="absolute inset-y-2 right-2 px-4 bg-[#00e5ff]/10 text-[#00e5ff] border border-[#00e5ff]/30 rounded-md text-xs font-bold tracking-widest uppercase hover:bg-[#00e5ff] hover:text-black transition-colors flex items-center"
-      >
-        Buscar
-      </button>
     </form>
   );
 }
