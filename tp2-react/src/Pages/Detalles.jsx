@@ -4,11 +4,13 @@ import { getItemById } from "../services/getItemById";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import Error404 from "./Error404";
+import { useTranslation } from "react-i18next";
 
 export default function Detalles() {
   const { id } = useParams();
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
+  const { t } = useTranslation();
   const [error404, setError404] = useState(false);
   const [errorImagen, setErrorImagen] = useState(false);
   const [esFavorito, setEsFavorito] = useState(false);
@@ -32,7 +34,7 @@ export default function Detalles() {
     };
 
     obtenerDatos();
-    document.title = "NEXUS - Ficha Técnica";
+    document.title = t('details.title');
   }, [id]);
 
   const toggleFavorito = () => {
@@ -65,7 +67,7 @@ export default function Detalles() {
           <div className="flex flex-col items-center justify-center mt-32">
             <div className="w-16 h-16 border-4 border-[#00e5ff]/20 border-t-[#00e5ff] rounded-full animate-spin"></div>
             <p className="text-[#00e5ff] mt-6 tracking-[0.3em] uppercase text-sm font-bold">
-              Descargando Ficha Técnica...
+              {t('details.loading')}
             </p>
           </div>
         ) : (
@@ -87,7 +89,7 @@ export default function Detalles() {
                   d="M10 19l-7-7m0 0l7-7m-7 7h18"
                 />
               </svg>
-              Volver a Home
+              {t('details.backToHome')}
             </Link>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -120,7 +122,7 @@ export default function Detalles() {
                       />
                     </svg>
                     <span className="text-sm font-bold tracking-widest uppercase">
-                      Sin Señal Visual
+                      {t('details.imgError')}
                     </span>
                   </div>
                 ) : (
@@ -142,7 +144,7 @@ export default function Detalles() {
                     {producto.category}
                   </span>
                   <span className="bg-white/5 text-white/60 border border-white/10 px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase">
-                    ID_REGISTRO: {producto.id}
+                    {t('details.id')}: {producto.id}
                   </span>
                 </div>
 
@@ -169,8 +171,8 @@ export default function Detalles() {
                       />
                     </svg>
                     {esFavorito
-                      ? "QUITAR DE FAVORITOS"
-                      : "GUARDAR EN FAVORITOS"}
+                      ? t('details.removeFromFavorites')
+                      : t('details.addToFavorites')}
                   </button>
 
                   <button className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-3">
@@ -193,7 +195,7 @@ export default function Detalles() {
                       rel="noopener noreferrer"
                     >
                       <span className="hidden md:inline text-sm">
-                        BUSCAR EN TIENDAS
+                        {t('details.searchInStores')}
                       </span>
                     </Link>
                   </button>
@@ -203,7 +205,7 @@ export default function Detalles() {
                   <section>
                     <h3 className="text-[#00e5ff] uppercase tracking-widest text-xs font-bold mb-3 flex items-center gap-2">
                       <div className="w-2 h-2 bg-[#00e5ff] rounded-full"></div>
-                      Análisis de Rendimiento
+                      {t('details.performanceAnalysis')}
                     </h3>
                     <p className="text-white/80 leading-relaxed text-lg">
                       {producto.fullDescription}
@@ -212,7 +214,7 @@ export default function Detalles() {
                   <section>
                     <h3 className="text-[#00e5ff] uppercase tracking-widest text-xs font-bold mb-3 flex items-center gap-2">
                       <div className="w-2 h-2 bg-[#00e5ff] rounded-full"></div>
-                      Especificaciones Base
+                      {t('details.baseSpecifications')}
                     </h3>
                     <div className="bg-white/5 p-6 rounded-xl border border-white/5">
                       <ul className="flex flex-col gap-3">

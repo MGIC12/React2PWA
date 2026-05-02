@@ -1,6 +1,9 @@
 import React, { useState } from "react";
 
+import { useTranslation } from 'react-i18next';
+
 export default function BarraBusqueda({ onSearch }) {
+  const { t } = useTranslation();
   const [query, setQuery] = useState("");
 
   const handleChange = (e) => {
@@ -43,7 +46,7 @@ export default function BarraBusqueda({ onSearch }) {
       </div>
       <input
         type="text"
-        placeholder="Buscar por ID, nombre o categoría..."
+        placeholder={t('barraBusqueda.placeholder')}
         value={query}
         onChange={handleChange}
         className="w-full h-14 pl-12 pr-28 bg-[#0c0c14] border border-[#1e1e30] text-white rounded-lg focus:outline-none focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff] transition-all placeholder:text-white/30 shadow-[0_0_15px_rgba(0,0,0,0.3)]"

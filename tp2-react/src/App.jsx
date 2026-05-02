@@ -6,6 +6,7 @@ import Acerca from "./Pages/Acerca";
 import Detalles from "./Pages/Detalles";
 import Error404 from "./Pages/Error404";
 import "./App.css";
+import './js/i18n' // Importa la configuración de i18n
 
 function App() {
   return (

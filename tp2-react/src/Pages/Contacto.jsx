@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import { useTranslation } from 'react-i18next';
 
 export default function Contacto() {
+  const { t, i18n } = useTranslation();
+  
   useEffect(() => {
-    document.title = "Contacto";
-  }, []);
+    document.title = t('nav.contact');
+  }, [t, i18n.language]);
   // Estados para manejar el formulario
   const [formData, setFormData] = useState({
     nombre: "",
@@ -48,12 +51,10 @@ export default function Contacto() {
       <main className="grow container mx-auto px-6 md:px-10 py-12 lg:py-20">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-wider">
-            INICIA UNA <span className="text-[#00e5ff]">CONEXIÓN</span>
+            {t('contact.title')} <span className="text-[#00e5ff]">{t('contact.titleHighlight')}</span>
           </h1>
           <p className="text-white/60 text-lg leading-relaxed">
-            ¿Encontraste un error en una ficha técnica? ¿Quieres proponer un
-            nuevo componente para la biblioteca? Estamos aquí para escuchar a la
-            comunidad.
+            {t('contact.subtitle')}
           </p>
         </div>
 
@@ -78,17 +79,16 @@ export default function Contacto() {
                   </svg>
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-2 tracking-widest">
-                  TRANSMISIÓN EXITOSA
+                  {t('contact.successTitle')}
                 </h3>
                 <p className="text-white/60 text-center px-6">
-                  Hemos recibido tu mensaje. Un administrador de NEXUS revisará
-                  tu solicitud en breve.
+                  {t('contact.successMsg')}
                 </p>
               </div>
             )}
 
             <h2 className="text-2xl font-bold text-white mb-8 border-l-4 border-[#00e5ff] pl-4">
-              TERMINAL DE CONTACTO
+              {t('contact.formTitle')}
             </h2>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-6">
@@ -98,7 +98,7 @@ export default function Contacto() {
                     htmlFor="nombre"
                     className="text-white/40 text-xs font-bold tracking-widest uppercase"
                   >
-                    Identificador (Nombre)
+                    {t('contact.nameLabel')}
                   </label>
                   <input
                     type="text"
@@ -108,7 +108,7 @@ export default function Contacto() {
                     value={formData.nombre}
                     onChange={handleChange}
                     className="bg-[#050508] border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff] transition-all"
-                    placeholder="Ej. John Doe"
+                    placeholder={t('contact.namePlaceholder')}
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -116,7 +116,7 @@ export default function Contacto() {
                     htmlFor="email"
                     className="text-white/40 text-xs font-bold tracking-widest uppercase"
                   >
-                    Canal de Retorno (Email)
+                    {t('contact.emailLabel')}
                   </label>
                   <input
                     type="email"
@@ -126,7 +126,7 @@ export default function Contacto() {
                     value={formData.email}
                     onChange={handleChange}
                     className="bg-[#050508] border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff] transition-all"
-                    placeholder="correo@ejemplo.com"
+                    placeholder={t('contact.emailPlaceholder')}
                   />
                 </div>
               </div>
@@ -135,7 +135,7 @@ export default function Contacto() {
                   htmlFor="asunto"
                   className="text-white/40 text-xs font-bold tracking-widest uppercase"
                 >
-                  Protocolo (Asunto)
+                  {t('contact.subjectLabel')}
                 </label>
                 <select
                   id="asunto"
@@ -146,12 +146,12 @@ export default function Contacto() {
                   className="bg-[#050508] border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff] transition-all appearance-none"
                 >
                   <option value="" disabled>
-                    Selecciona el motivo de contacto...
+                    {t('contact.subjectPlaceholder')}
                   </option>
-                  <option value="sugerencia">Sugerir Nuevo Hardware</option>
-                  <option value="correccion">Corregir Datos Técnicos</option>
-                  <option value="bug">Reportar Fallo en el Sistema</option>
-                  <option value="otro">Otras Comunicaciones</option>
+                  <option value="sugerencia">{t('contact.subjectSuggest')}</option>
+                  <option value="correccion">{t('contact.subjectCorrect')}</option>
+                  <option value="bug">{t('contact.subjectBug')}</option>
+                  <option value="otro">{t('contact.subjectOther')}</option>
                 </select>
               </div>
               <div className="flex flex-col gap-2">
@@ -159,7 +159,7 @@ export default function Contacto() {
                   htmlFor="mensaje"
                   className="text-white/40 text-xs font-bold tracking-widest uppercase"
                 >
-                  Paquete de Datos (Mensaje)
+                  {t('contact.messageLabel')}
                 </label>
                 <textarea
                   id="mensaje"
@@ -169,7 +169,7 @@ export default function Contacto() {
                   value={formData.mensaje}
                   onChange={handleChange}
                   className="bg-[#050508] border border-white/10 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-[#00e5ff] focus:ring-1 focus:ring-[#00e5ff] transition-all resize-none"
-                  placeholder="Detalla tu consulta aquí..."
+                  placeholder={t('contact.messagePlaceholder')}
                 ></textarea>
               </div>
               <button
@@ -180,11 +180,11 @@ export default function Contacto() {
                 {enviando ? (
                   <>
                     <div className="w-5 h-5 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
-                    ENCRIPTANDO...
+                    {t('contact.sendingBtn')}
                   </>
                 ) : (
                   <>
-                    <span>ENVIAR PAQUETE</span>
+                    <span>{t('contact.submitBtn')}</span>
                     <svg
                       className="w-5 h-5"
                       fill="none"
@@ -207,7 +207,7 @@ export default function Contacto() {
             {/* Info Directa */}
             <div>
               <h3 className="text-xl font-bold text-white mb-6">
-                Nodos de Comunicación
+                {t('contact.communicationNodes')}
               </h3>
               <div className="flex flex-col gap-6">
                 <div className="flex items-start gap-4">
@@ -228,10 +228,10 @@ export default function Contacto() {
                   </div>
                   <div>
                     <h4 className="text-white font-bold text-sm">
-                      Transmisión Directa
+                      {t('contact.directTransmission')}
                     </h4>
                     <p className="text-white/60 text-sm mt-1">
-                      support@nexus.com
+                      {t('contact.email')}
                     </p>
                   </div>
                 </div>
@@ -248,10 +248,10 @@ export default function Contacto() {
                   </div>
                   <div>
                     <h4 className="text-white font-bold text-sm">
-                      Comunidad Discord
+                      {t('contact.discordCommunity')}
                     </h4>
                     <p className="text-white/60 text-sm mt-1">
-                      Únete a Discord para soporte en tiempo real.
+                      {t('contact.discordDesc')}
                     </p>
                   </div>
                 </div>
@@ -272,12 +272,10 @@ export default function Contacto() {
                     d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                Aviso Importante
+                {t('contact.importantNotice')}
               </h4>
               <p className="text-white/70 text-sm leading-relaxed">
-                NEXUS es un proyecto para el aprendizaje de React (Proyecto
-                BACINSTU). No procesamos ventas directas, garantías comerciales
-                ni despachos de productos. En definitiva, todo es trucho. :D
+                {t('contact.disclaimer')}
               </p>
             </div>
           </div>

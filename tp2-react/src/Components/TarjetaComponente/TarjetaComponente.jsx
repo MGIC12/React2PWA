@@ -1,8 +1,9 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 
 export default function Tarjeta({ item }) {
+  const { t } = useTranslation();
   const [errorImagen, setErrorImagen] = useState(false);
-
   return (
     <div
       className="w-full h-full flex flex-col bg-[#0c0c14] border border-[#1e1e30] rounded-lg overflow-hidden cursor-pointer transition-all duration-300 hover:border-[#00e5ff] hover:shadow-[0_0_20px_rgba(0,229,255,0.15)] hover:-translate-y-1 group"
@@ -34,7 +35,7 @@ export default function Tarjeta({ item }) {
               />
             </svg>
             <span className="text-[0.65rem] font-bold tracking-widest uppercase">
-              Sin Señal Visual
+              {t('card.imageError')}
             </span>
           </div>
         ) : (
@@ -65,7 +66,7 @@ export default function Tarjeta({ item }) {
         </p>
         <div className="border-t border-[#1e1e30] pt-4 mt-auto">
           <button className="w-full bg-transparent border border-[#1e1e30] text-white/70 text-xs uppercase tracking-widest px-4 py-3 rounded-md transition-all duration-200 group-hover:border-[#00e5ff] group-hover:text-[#00e5ff] group-hover:bg-[#00e5ff]/10">
-            Ver Ficha Técnica
+            {t('card.viewDetails')}
           </button>
         </div>
       </div>
