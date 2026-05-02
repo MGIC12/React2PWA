@@ -2,18 +2,21 @@ import React, { useEffect, useState } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import BarraBusqueda from "../Components/BarraBusqueda/BarraBusqueda";
-import TarjetaComponente from "../Components/TarjetaComponente/TarjetaComponente";
+import TarjetaComponente from "../Components/tarjetaComponente/TarjetaComponente";
 import { getAllItems } from "../services/getAllItems";
 import { Link } from "react-router-dom";
 
+import { useTranslation } from 'react-i18next';
+
 export default function Home() {
+  const { t, i18n } = useTranslation();
   const [items, setItems] = useState([]);
   const [cargando, setCargando] = useState(true);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
 
   const handleSearch = (valorDesdeHijo) => {
-    setPage(1);
+    setPage(1); 
     setSearch(valorDesdeHijo);
   };
 
@@ -33,8 +36,9 @@ export default function Home() {
   }, [page, search]);
 
   useEffect(() => {
-    document.title = "Home";
-  }, []);
+    document.title = t('nav.home');
+  }, [t, i18n.language]);
+  
 
   return (
     <div
@@ -47,20 +51,22 @@ export default function Home() {
           NEX<span className="text-[#00e5ff]">US</span>
         </h1>
         <p className="text-lg md:text-xl text-white/70 uppercase tracking-widest font-bold text-center px-4">
-          Jugá sin límites{" "}
+          {t('home.slogan1')}{" "}
           <span className="text-[#00e5ff] hidden md:inline mx-2">•</span>
-          <br className="md:hidden" /> Sentí cada frame
+          <br className="md:hidden" /> {t('home.slogan2')}
         </p>
       </div>
       <main className="grow container mx-auto px-6 md:px-10 py-12 flex flex-col items-center">
         <div className="w-full max-w-3xl mb-12">
-          <BarraBusqueda onSearch={handleSearch} />
+          <BarraBusqueda 
+          onSearch={handleSearch} />
+
         </div>
         {cargando ? (
           <div className="flex flex-col items-center justify-center mt-20">
             <div className="w-12 h-12 border-4 border-[#00e5ff]/20 border-t-[#00e5ff] rounded-full animate-spin"></div>
             <p className="text-[#00e5ff] mt-6 tracking-[0.3em] uppercase text-sm font-bold animate-pulse">
-              Sincronizando Archivo...
+              {t('home.loading')}
             </p>
           </div>
         ) : (
@@ -68,7 +74,7 @@ export default function Home() {
             {items.map((item) => (
               <Link
                 to={`/items/${item.id}`}
-                key={item.id}
+                key={`${item.id}-${i18n.language}`}
                 className="block h-full"
               >
                 <TarjetaComponente item={item} />

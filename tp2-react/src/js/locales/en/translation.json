@@ -1,0 +1,107 @@
+{
+        "nav": {
+            "home": "Home",
+            "favorites": "Favorites",
+            "about": "about us",
+            "contact": "contact"
+    },
+        
+        "barraBusqueda": {
+            "placeholder": "Search by ID, name or category..."
+    },
+        "footer": {
+            "bio": "The ultimate high-performance hardware catalog. Build your setup, save your favorites, and dominate the game.",
+            "navigation": "Navigation",
+            "home": "Home",
+            "favorites": "Favorites",
+            "about": "About Us",
+            "contact": "Contact",
+            "onlineSystems": "Online Systems",
+            "suport": "Technical Support:"
+        },
+        "card": {
+            "imageError": "No Visual Signal",
+            "viewDetails": "View Technical Specs"
+        },
+        "home": {
+            "slogan1": "Play without limits",
+            "slogan2": "Feel every frame",    
+            "loading": "loading Files..."
+        },
+        "favorites": {
+            "h1-1": "YOUR",
+            "h1-2": "FAVORITES",
+            "subtitle": "Your custom build saved locally",
+            "emptyFile": "Empty File",
+            "emptySubtitle": "You haven't saved any components to your watchlist yet. Explore the catalog to start building your setup.",
+            "exploreButton": "Explore Catalog"
+        },
+        "404": {
+            "h1": "Page Not Found",
+            "p1": "Sorry, we couldn't find what you were looking for. The item may not exist, or the URL might be incorrect.",
+            "homeButton": "Back to Home"
+        },
+        "details": {
+            "title": "NEXUS - Technical Specs",
+            "loading": "Downloading Technical Specs...",
+            "backToHome": "Back to Home",
+            "imgError": "No Visual Signal",
+            "id": "REGISTRATION_ID",
+            "removeFromFavorites": "REMOVE FROM FAVORITES",
+            "addToFavorites": "ADD TO FAVORITES",
+            "searchInStores": "SEARCH IN STORES",
+            "performanceAnalysis": "Performance Analysis",
+            "baseSpecifications": "Base Specifications"
+        },
+        "contact": {
+            "title": "START A",
+            "titleHighlight": "CONNECTION",
+            "subtitle": "Did you find an error in a technical sheet? Do you want to suggest a new component for the library? We're here to listen to the community.",
+            "formTitle": "CONTACT TERMINAL",
+            "nameLabel": "Identifier (Name)",
+            "namePlaceholder": "E.g. John Doe",
+            "emailLabel": "Return Channel (Email)",
+            "emailPlaceholder": "email@example.com",
+            "subjectLabel": "Protocol (Subject)",
+            "subjectPlaceholder": "Select reason for contact...",
+            "subjectSuggest": "Suggest New Hardware",
+            "subjectCorrect": "Correct Technical Data",
+            "subjectBug": "Report System Bug",
+            "subjectOther": "Other Communications",
+            "messageLabel": "Data Package (Message)",
+            "messagePlaceholder": "Detail your inquiry here...",
+            "submitBtn": "SEND PACKAGE",
+            "sendingBtn": "ENCRYPTING...",
+            "successTitle": "SUCCESSFUL TRANSMISSION",
+            "successMsg": "We've received your message. A NEXUS administrator will review your request shortly.",
+            "communicationNodes": "Communication Nodes",
+            "directTransmission": "Direct Transmission",
+            "email": "support@nexus.com",
+            "discordCommunity": "Discord Community",
+            "discordDesc": "Join Discord for real-time support.",
+            "importantNotice": "Important Notice",
+            "disclaimer": "NEXUS is a React learning project (BACINSTU Project). We do not process direct sales, commercial warranties, or product shipments. Everything is fake. :D"
+        },
+        "about": {
+            "title": "About Us",
+            "mainTitle": "THE ULTIMATE LIBRARY OF",
+            "mainTitleHighlight": "HARDWARE",
+            "mainDesc": "At NEXUS, we don't sell components; we collect, analyze, and catalog the most accurate technical information to help you design the perfect setup.",
+            "missionTitle": "OUR MISSION",
+            "missionP1": "NEXUS was born from the need for a centralized and reliable place to consult real technical specifications. Often, crucial information is hidden behind misleading marketing on manufacturer websites.",
+            "missionP2": "Our goal is to build the largest digital archive of enthusiast-grade hardware. A space designed for creators, gamers, and professionals, where they can compare technologies, save their favorite lists, and plan their next technological leap with real data.",
+            "stats1Title": "100%",
+            "stats1Desc": "Pure Technical Data",
+            "stats2Title": "+50",
+            "stats2Desc": "Analyzed Specs",
+            "pillarsTitle": "PILLARS OF",
+            "pillarsTitleHighlight": "NEXUS",
+            "pillar1Title": "Objective Data",
+            "pillar1Desc": "We separate marketing noise from facts. Our technical specs reflect the true capabilities of each hardware piece, without commercial bias.",
+            "pillar2Title": "Design Your Build",
+            "pillar2Desc": "Use our favorites system to save the parts you're interested in and compare them easily to make the best decision.",
+            "pillar3Title": "For the Community",
+            "pillar3Desc": "Developed as a free tool (BACINSTU V1.0 Project) so any PC Master Race enthusiast has quick access to information."
+        }
+
+}

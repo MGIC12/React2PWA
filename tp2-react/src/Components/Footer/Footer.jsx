@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from 'react-i18next';
 
 export default function Footer() {
+  const { t } = useTranslation();
   return (
     <footer
       className="mt-auto border-t border-white/10 bg-[#050508] py-12"
@@ -18,40 +20,39 @@ export default function Footer() {
               NEX<span className="text-[#00e5ff]">US</span>
             </Link>
             <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-              El catálogo definitivo de hardware de alto rendimiento. Construye
-              tu setup, guarda tus favoritos y domina el juego.
+              {t('footer.bio')}
             </p>
           </div>
 
           {/* Columna Central: Navegación Rápida */}
           <div className="flex flex-col md:items-center">
             <h3 className="text-white text-sm font-bold tracking-widest uppercase mb-6 border-b border-[#00e5ff]/30 pb-2 inline-block">
-              Navegación
+              {t('footer.navigation')}
             </h3>
             <nav className="flex flex-col gap-3">
               <Link
                 to="/"
                 className="text-white/60 hover:text-[#00e5ff] transition-colors duration-300 text-sm font-medium"
               >
-                Home
+                {t('footer.home')}
               </Link>
               <Link
                 to="/favoritos"
                 className="text-white/60 hover:text-[#00e5ff] transition-colors duration-300 text-sm font-medium"
               >
-                Favoritos
+                {t('footer.favorites')}
               </Link>
               <Link
                 to="/contacto"
                 className="text-white/60 hover:text-[#00e5ff] transition-colors duration-300 text-sm font-medium"
               >
-                Contacto
+                {t('footer.contact')}
               </Link>
               <Link
                 to="/acerca"
                 className="text-white/60 hover:text-[#00e5ff] transition-colors duration-300 text-sm font-medium"
               >
-                Acerca de
+                {t('footer.about')}
               </Link>
             </nav>
           </div>
@@ -59,7 +60,7 @@ export default function Footer() {
           {/* Columna Derecha: Redes y Contacto */}
           <div className="flex flex-col md:items-end text-left md:text-right">
             <h3 className="text-white text-sm font-bold tracking-widest uppercase mb-6 border-b border-[#00e5ff]/30 pb-2 inline-block">
-              Sistemas Online
+              {t('footer.onlineSystems')}
             </h3>
 
             {/* CONTENEDOR DE ÍCONOS */}
@@ -113,7 +114,7 @@ export default function Footer() {
             </div>
 
             <p className="text-white/40 text-xs">
-              Soporte Técnico: support@nexus.com
+              {t('footer.support')} support@nexus.com
             </p>
           </div>
         </div>

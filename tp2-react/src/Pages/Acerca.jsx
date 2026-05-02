@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
+import { useTranslation } from 'react-i18next';
 
 export default function Acerca() {
+  const { t, i18n } = useTranslation();
+  
   useEffect(() => {
-    document.title = "Acerca de";
-  }, []);
+    document.title = t('about.title');
+  }, [t, i18n.language]);
   return (
     <div
       className="min-h-screen flex flex-col bg-[#050508]"
@@ -16,13 +19,11 @@ export default function Acerca() {
       <main className="grow container mx-auto px-6 md:px-10 py-12 lg:py-20">
         <div className="text-center max-w-3xl mx-auto mb-20">
           <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-wider">
-            LA BIBLIOTECA DEFINITIVA DE{" "}
-            <span className="text-[#00e5ff]">HARDWARE</span>
+            {t('about.mainTitle')}{" "}
+            <span className="text-[#00e5ff]">{t('about.mainTitleHighlight')}</span>
           </h1>
           <p className="text-white/60 text-lg md:text-xl leading-relaxed">
-            En NEXUS no vendemos componentes; recopilamos, analizamos y
-            catalogamos la información técnica más precisa para ayudarte a
-            diseñar el setup perfecto.
+            {t('about.mainDesc')}
           </p>
         </div>
 
@@ -40,35 +41,28 @@ export default function Acerca() {
 
           <div className="w-full lg:w-1/2 flex flex-col justify-center">
             <h2 className="text-2xl font-bold text-white mb-4 tracking-widest border-l-4 border-[#00e5ff] pl-4">
-              NUESTRA MISIÓN
+              {t('about.missionTitle')}
             </h2>
             <p className="text-white/70 leading-relaxed mb-6">
-              NEXUS nació de la necesidad de tener un lugar centralizado y
-              confiable donde consultar especificaciones técnicas reales. A
-              menudo, la información crucial está oculta detrás de marketing
-              engañoso en los sitios de fabricantes.
+              {t('about.missionP1')}
             </p>
             <p className="text-white/70 leading-relaxed mb-8">
-              Nuestro objetivo es construir el mayor archivo digital de hardware
-              de grado entusiasta. Un espacio diseñado para creadores, gamers y
-              profesionales, donde puedan comparar tecnologías, guardar sus
-              listas de favoritos y planificar su próximo salto tecnológico con
-              datos reales.
+              {t('about.missionP2')}
             </p>
 
             <div className="grid grid-cols-2 gap-6 border-t border-white/10 pt-8">
               <div>
                 <h4 className="text-4xl font-black text-[#00e5ff] mb-1">
-                  100%
+                  {t('about.stats1Title')}
                 </h4>
                 <p className="text-white/50 text-xs tracking-widest uppercase font-bold">
-                  Datos Técnicos Puros
+                  {t('about.stats1Desc')}
                 </p>
               </div>
               <div>
-                <h4 className="text-4xl font-black text-[#00e5ff] mb-1">+50</h4>
+                <h4 className="text-4xl font-black text-[#00e5ff] mb-1">{t('about.stats2Title')}</h4>
                 <p className="text-white/50 text-xs tracking-widest uppercase font-bold">
-                  Fichas Analizadas
+                  {t('about.stats2Desc')}
                 </p>
               </div>
             </div>
@@ -77,7 +71,7 @@ export default function Acerca() {
 
         <div className="text-center mb-16">
           <h3 className="text-3xl font-extrabold text-white mb-12">
-            PILARES DE <span className="text-[#00e5ff]">NEXUS</span>
+            {t('about.pillarsTitle')} <span className="text-[#00e5ff]">{t('about.pillarsTitleHighlight')}</span>
           </h3>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -98,12 +92,10 @@ export default function Acerca() {
                 </svg>
               </div>
               <h4 className="text-xl font-bold text-white mb-3">
-                Datos Objetivos
+                {t('about.pillar1Title')}
               </h4>
               <p className="text-white/60 text-sm leading-relaxed">
-                Separamos el ruido del marketing. Nuestras fichas técnicas
-                reflejan las verdaderas capacidades de cada pieza de hardware,
-                sin sesgos comerciales.
+                {t('about.pillar1Desc')}
               </p>
             </div>
 
@@ -124,12 +116,10 @@ export default function Acerca() {
                 </svg>
               </div>
               <h4 className="text-xl font-bold text-white mb-3">
-                Diseña tu Build
+                {t('about.pillar2Title')}
               </h4>
               <p className="text-white/60 text-sm leading-relaxed">
-                Utiliza nuestro sistema de favoritos para guardar las piezas que
-                te interesan y compáralas de forma sencilla para tomar la mejor
-                decisión.
+                {t('about.pillar2Desc')}
               </p>
             </div>
 
@@ -150,12 +140,10 @@ export default function Acerca() {
                 </svg>
               </div>
               <h4 className="text-xl font-bold text-white mb-3">
-                Para la Comunidad
+                {t('about.pillar3Title')}
               </h4>
               <p className="text-white/60 text-sm leading-relaxed">
-                Desarrollado como una herramienta libre (Proyecto BACINSTU V1.0)
-                para que cualquier entusiasta del PC Master Race tenga acceso
-                rápido a la información.
+                {t('about.pillar3Desc')}
               </p>
             </div>
           </div>

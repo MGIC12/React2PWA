@@ -1,0 +1,105 @@
+{
+  "nav": {
+    "home": "Accueil",
+    "favorites": "Favoris",
+    "about": "À propos",
+    "contact": "Contact"
+  },
+  "barraBusqueda": {
+    "placeholder": "Rechercher par ID, nom ou catégorie..."
+  },
+  "footer": {
+    "bio": "Le catalogue définitif de matériel haute performance. Construisez votre configuration, enregistrez vos favoris et dominez le jeu.",
+    "navigation": "navigation",
+    "home": "Accueil",
+    "favorites": "Favoris",
+    "about": "À propos",
+    "contact": "Contact",
+    "onlineSystems": "Systèmes en ligne",
+    "suport": "Support technique :"
+  },
+  "card": {
+    "imageError": "Aucun signal visuel",
+    "viewDetails": "Voir la fiche technique"
+  },
+  "home": {
+    "slogan1": "Jouez sans limites",
+    "slogan2": "Ressentez chaque frame",
+    "loading": "Synchronisation du fichier..."
+  },
+  "favorites": {
+    "h1-1": "VOS",
+    "h1-2": "FAVORIS",
+    "subtitle": "Votre configuration personnalisée enregistrée localement",
+    "emptyFile": "Fichier vide",
+    "emptySubtitle": "Vous n'avez pas encore enregistré de composants dans votre liste de suivi. Explorez le catalogue pour monter votre setup.",
+    "exploreButton": "Explorer le catalogue"
+  },
+  "404": {
+    "h1": "Page non trouvée",
+    "p1": "Désolé, nous n'avons pas pu trouver ce que vous cherchiez. Il est possible que l'élément n'existe pas ou que l'URL soit incorrecte.",
+    "homeButton": "Retour à l'accueil"
+  },
+  "details": {
+    "title": "NEXUS - Fiche Technique",
+    "loading": "Téléchargement de la fiche technique...",
+    "backToHome": "Retour à l'accueil",
+    "imgError": "Aucun signal visuel",
+    "id": "ID_ENREGISTREMENT",
+    "removeFromFavorites": "RETIRER DES FAVORIS",
+    "addToFavorites": "AJOUTER AUX FAVORIS",
+    "searchInStores": "RECHERCHER EN MAGASIN",
+    "performanceAnalysis": "Analyse de performance",
+    "baseSpecifications": "Spécifications de base"
+  },
+  "contact": {
+    "title": "INITIER UNE",
+    "titleHighlight": "CONNEXION",
+    "subtitle": "Vous avez trouvé une erreur dans une fiche technique ? Vous souhaitez proposer un nouveau composant ? Nous sommes à l'écoute de la communauté.",
+    "formTitle": "TERMINAL DE CONTACT",
+    "nameLabel": "Identifiant (Nom)",
+    "namePlaceholder": "Ex. John Doe",
+    "emailLabel": "Canal de retour (Email)",
+    "emailPlaceholder": "courriel@exemple.com",
+    "subjectLabel": "Protocole (Objet)",
+    "subjectPlaceholder": "Sélectionnez le motif du contact...",
+    "subjectSuggest": "Suggérer un nouveau matériel",
+    "subjectCorrect": "Corriger des données techniques",
+    "subjectBug": "Signaler un bug système",
+    "subjectOther": "Autres communications",
+    "messageLabel": "Paquet de données (Message)",
+    "messagePlaceholder": "Détaillez votre demande ici...",
+    "submitBtn": "ENVOYER LE PAQUET",
+    "sendingBtn": "CRYPTAGE EN COURS...",
+    "successTitle": "TRANSMISSION RÉUSSIE",
+    "successMsg": "Nous avons reçu votre message. Un administrateur de NEXUS examinera votre demande sous peu.",
+    "communicationNodes": "Nœuds de communication",
+    "directTransmission": "Transmission directe",
+    "email": "support@nexus.com",
+    "discordCommunity": "Communauté Discord",
+    "discordDesc": "Rejoignez Discord pour un support en temps réel.",
+    "importantNotice": "Avis important",
+    "disclaimer": "NEXUS est un projet d'apprentissage React (Projet BACINSTU). Nous ne traitons pas les ventes directes, les garanties commerciales ou les expéditions. En résumé, tout est fictif. :D"
+  },
+  "about": {
+    "title": "À propos",
+    "mainTitle": "LA BIBLIOTHÈQUE DÉFINITIVE DE",
+    "mainTitleHighlight": "MATÉRIEL",
+    "mainDesc": "Chez NEXUS, nous ne vendons pas de composants ; nous collectons, analysons et cataloguons les informations techniques les plus précises pour vous aider à concevoir la configuration parfaite.",
+    "missionTitle": "NOTRE MISSION",
+    "missionP1": "NEXUS est né du besoin d'un lieu centralisé et fiable pour consulter des spécifications techniques réelles. Souvent, les informations cruciales sont cachées derrière un marketing trompeur sur les sites des fabricants.",
+    "missionP2": "Notre objectif est de construire la plus grande archive numérique de matériel pour passionnés. Un espace conçu pour les créateurs, les gamers et les professionnels, où ils peuvent comparer les technologies et planifier leur prochain saut technologique.",
+    "stats1Title": "100%",
+    "stats1Desc": "Données techniques pures",
+    "stats2Title": "+50",
+    "stats2Desc": "Fiches analysées",
+    "pillarsTitle": "PILIERS DE",
+    "pillarsTitleHighlight": "NEXUS",
+    "pillar1Title": "Données objectives",
+    "pillar1Desc": "Nous séparons le bruit du marketing. Nos fiches techniques reflètent les capacités réelles de chaque matériel, sans biais commercial.",
+    "pillar2Title": "Concevez votre Build",
+    "pillar2Desc": "Utilisez notre système de favoris pour enregistrer les pièces qui vous intéressent et comparez-les facilement pour prendre la meilleure décision.",
+    "pillar3Title": "Pour la communauté",
+    "pillar3Desc": "Développé comme un outil libre (Projet BACINSTU V1.0) pour que tout passionné de PC Master Race ait un accès rapide à l'information."
+  }
+}

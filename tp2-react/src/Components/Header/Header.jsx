@@ -1,9 +1,16 @@
 import React, { useState } from "react";
 import Navegacion from "../Navegacion/Navegacion";
+import { useTranslation } from 'react-i18next';
 
 export default function Header() {
   // Estado para controlar si el menú está abierto o cerrado
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const { t, i18n } = useTranslation();
+
+  const cambiarIdioma = (lng) => {
+    i18n.changeLanguage(lng);
+    };
 
   // Función para alternar el menú
   const toggleMenu = () => {
@@ -61,17 +68,23 @@ export default function Header() {
         </button>
         <div className="hidden md:flex items-center gap-10">
           <div className="flex items-center gap-6">
-            <Navegacion direccion="/" label="Home" />
-            <Navegacion direccion="/favoritos" label="Favoritos" />
-            <Navegacion direccion="/contacto" label="Contacto" />
-            <Navegacion direccion="/acerca" label="Acerca de" />
+            <Navegacion direccion="/" label={t('nav.home')} />
+            <Navegacion direccion="/favoritos" label={t('nav.favorites')} />
+            <Navegacion direccion="/contacto" label={t('nav.contact')} />
+            <Navegacion direccion="/acerca" label={t('nav.about')} />
           </div>
           <div className="flex items-center gap-2">
-            <button className="text-xl font-bold text-white/80 hover:text-white transition-colors">
+            <button 
+              onClick={() => cambiarIdioma('es')}
+              className="text-xl font-bold text-white/80 hover:text-white transition-colors"
+            > 
               ES
-            </button>
+            </button> 
             <p className="text-xl font-bold text-white/80">/</p>
-            <button className="text-xl font-bold text-white/80 hover:text-white transition-colors">
+            <button 
+              onClick={() => cambiarIdioma('en')}
+              className="text-xl font-bold text-white/80 hover:text-white transition-colors"
+            >
               EN
             </button>
           </div>
@@ -88,17 +101,21 @@ export default function Header() {
           className="flex flex-col items-center gap-8 text-2xl"
           onClick={toggleMenu}
         >
-          <Navegacion direccion="/" label="Home" />
-          <Navegacion direccion="/favoritos" label="Favoritos" />
-          <Navegacion direccion="/contacto" label="Contacto" />
-          <Navegacion direccion="/acerca" label="Acerca de" />
+          <Navegacion direccion="/" label={t('nav.home')} />
+          <Navegacion direccion="/favoritos" label={t('nav.favorites')} />
+          <Navegacion direccion="/contacto" label={t('nav.contact')} />
+          <Navegacion direccion="/acerca" label={t('nav.about')} />
         </div>
         <div className="flex items-center gap-4 mt-8 border-t border-white/10 pt-8 w-1/2 justify-center">
-          <button className="text-2xl font-bold text-white/80 hover:text-[#00e5ff] transition-colors">
+          <button 
+          onClick={() => cambiarIdioma('es')}
+          className="text-2xl font-bold text-white/80 hover:text-[#00e5ff] transition-colors">
             ES
           </button>
           <p className="text-2xl font-bold text-white/80">/</p>
-          <button className="text-2xl font-bold text-white/80 hover:text-[#00e5ff] transition-colors">
+          <button 
+          onClick={() => cambiarIdioma('en')}
+          className="text-2xl font-bold text-white/80 hover:text-[#00e5ff] transition-colors">
             EN
           </button>
         </div>
