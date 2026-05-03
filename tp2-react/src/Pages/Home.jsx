@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef, useCallback } from "react";
 import Header from "../Components/Header/Header";
 import Footer from "../Components/Footer/Footer";
 import BarraBusqueda from "../Components/BarraBusqueda/BarraBusqueda";
@@ -12,27 +12,56 @@ export default function Home() {
   const { t, i18n } = useTranslation();
   const [items, setItems] = useState([]);
   const [cargando, setCargando] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
+  const observer = useRef();
 
   const handleSearch = (valorDesdeHijo) => {
-    setPage(1); 
+    setPage(1);
     setSearch(valorDesdeHijo);
+    setItems([]);
+    setHasMore(true);
   };
 
+  const lastItemRef = useCallback(node => {
+    if (loadingMore) return;
+    if (observer.current) observer.current.disconnect();
+    observer.current = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPage(prevPage => prevPage + 1);
+      }
+    });
+    if (node) observer.current.observe(node);
+  }, [loadingMore, hasMore]);
+
   useEffect(() => {
-    const fetchItems = async (page, search) => {
-      setCargando(true);
+    const fetchItems = async (page, search, append = false) => {
+      if (append) {
+        setLoadingMore(true);
+      } else {
+        setCargando(true);
+      }
       try {
         const data = await getAllItems(page, search);
-        setItems(data);
+        if (append) {
+          setItems(prevItems => [...prevItems, ...data]);
+          if (data.length < 12) {
+            setHasMore(false);
+          }
+        } else {
+          setItems(data);
+          setHasMore(data.length === 12);
+        }
       } catch (error) {
         console.error("Error al cargar los items:", error);
       } finally {
         setCargando(false);
+        setLoadingMore(false);
       }
     };
-    fetchItems(page, search);
+    fetchItems(page, search, page > 1);
   }, [page, search]);
 
   useEffect(() => {
@@ -71,15 +100,24 @@ export default function Home() {
           </div>
         ) : (
           <div className="w-full max-w-7xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 md:gap-8">
-            {items.map((item) => (
+            {items.map((item, index) => (
               <Link
                 to={`/items/${item.id}`}
                 key={`${item.id}-${i18n.language}`}
                 className="block h-full"
+                ref={index === items.length - 1 ? lastItemRef : null}
               >
                 <TarjetaComponente item={item} />
               </Link>
             ))}
+            {loadingMore && (
+              <div className="col-span-full flex flex-col items-center justify-center py-8">
+                <div className="w-8 h-8 border-4 border-[#00e5ff]/20 border-t-[#00e5ff] rounded-full animate-spin"></div>
+                <p className="text-[#00e5ff] mt-4 tracking-[0.3em] uppercase text-sm font-bold animate-pulse">
+                  {t('home.loading')}
+                </p>
+              </div>
+            )}
           </div>
         )}
       </main>
