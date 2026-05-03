@@ -7,7 +7,12 @@
   },
 
   "barraBusqueda": {
-    "placeholder": "Buscar por ID, nombre o categoria..."
+    "placeholder": "Buscar por nombre..."
+  },
+  "filter": {
+    "title": "Categorías",
+    "clear": "Limpiar todo",
+    "apply": "Aplicar filtros"
   },
 
   "footer": {

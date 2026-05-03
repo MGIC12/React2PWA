@@ -7,7 +7,12 @@
   },
 
   "barraBusqueda": {
-    "placeholder": "Search by ID, name or category..."
+    "placeholder": "Search by name..."
+  },
+  "filter": {
+    "title": "Categories",
+    "clear": "Clear all",
+    "apply": "Apply filters"
   },
   "footer": {
     "bio": "The ultimate high-performance hardware catalog. Build your setup, save your favorites, and dominate the game.",
