@@ -8,6 +8,11 @@
   "barraBusqueda": {
     "placeholder": "Rechercher par ID, nom ou catégorie..."
   },
+  "filter": {
+    "title": "Catégories",
+    "clear": "Tout effacer",
+    "apply": "Appliquer les filtres"
+  },
   "footer": {
     "bio": "Le catalogue définitif de matériel haute performance. Construisez votre configuration, enregistrez vos favoris et dominez le jeu.",
     "navigation": "navigation",

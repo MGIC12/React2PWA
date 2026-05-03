@@ -17,6 +17,15 @@ export default function Home() {
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(1);
   const observer = useRef();
+  const [filters, setFilters] = useState([]);
+
+
+const handleFilterChange = (selectedCategories) => {
+  setPage(1);
+  setFilters(selectedCategories);
+  setItems([]);
+  setHasMore(true);
+};
 
   const handleSearch = (valorDesdeHijo) => {
     setPage(1);
@@ -37,22 +46,29 @@ export default function Home() {
   }, [loadingMore, hasMore]);
 
   useEffect(() => {
-    const fetchItems = async (page, search, append = false) => {
+    const fetchItems = async (page, search, filters, append = false) => {
       if (append) {
         setLoadingMore(true);
       } else {
         setCargando(true);
       }
       try {
-        const data = await getAllItems(page, search);
+        const data = await getAllItems(page, search, filters);
+        const filteredData = filters.length > 0
+          ? data.filter((item) => {
+              const itemCategory = String(item.category || "").toLowerCase();
+              return filters.some((filter) => String(filter).toLowerCase() === itemCategory);
+            })
+          : data;
+
         if (append) {
-          setItems(prevItems => [...prevItems, ...data]);
-          if (data.length < 12) {
+          setItems(prevItems => [...prevItems, ...filteredData]);
+          if (filteredData.length < 12) {
             setHasMore(false);
           }
         } else {
-          setItems(data);
-          setHasMore(data.length === 12);
+          setItems(filteredData);
+          setHasMore(filteredData.length === 12);
         }
       } catch (error) {
         console.error("Error al cargar los items:", error);
@@ -61,8 +77,8 @@ export default function Home() {
         setLoadingMore(false);
       }
     };
-    fetchItems(page, search, page > 1);
-  }, [page, search]);
+    fetchItems(page, search, filters, page > 1);
+  }, [page, search, filters]);
 
   useEffect(() => {
     document.title = t("nav.home");
@@ -85,8 +101,9 @@ export default function Home() {
         </p>
       </div>
       <main className="grow container mx-auto px-6 md:px-10 py-12 flex flex-col items-center">
-        <div className="w-full max-w-3xl mb-12">
-          <BarraBusqueda onSearch={handleSearch} />
+        <div className="flex gap-4 w-full max-w-3xl mb-12">
+          <BarraBusqueda onSearch={handleSearch} onFilterChange={handleFilterChange} />
+
         </div>
         {cargando ? (
           <div className="flex flex-col items-center justify-center mt-20">
