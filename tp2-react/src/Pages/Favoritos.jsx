@@ -6,15 +6,15 @@ import TarjetaComponente from "../Components/TarjetaComponente/TarjetaComponente
 import { useTranslation } from "react-i18next";
 
 export default function Favoritos() {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [favoritos, setFavoritos] = useState([]);
 
   useEffect(() => {
     const favoritosGuardados =
       JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
     setFavoritos(favoritosGuardados);
-    document.title = "NEXUS - Favoritos";
-  }, []);
+    document.title = t("favorites.h1");
+  }, [t, i18n.language]);
 
   return (
     <div
@@ -38,10 +38,11 @@ export default function Favoritos() {
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
               />
             </svg>
-            {t('favorites.h1-1')} <span className="text-[#00e5ff]">{t('favorites.h1-2')}</span>
+            {t("favorites.h1-1")}{" "}
+            <span className="text-[#00e5ff]">{t("favorites.h1-2")}</span>
           </h1>
           <p className="text-white/60 mt-4 tracking-widest uppercase text-sm font-bold">
-            {t('favorites.subtitle')}
+            {t("favorites.subtitle")}
           </p>
         </div>
 
@@ -62,15 +63,17 @@ export default function Favoritos() {
                 />
               </svg>
             </div>
-            <h3 className="text-xl font-bold text-white mb-2">{t('favorites.emptyFile')}</h3>
+            <h3 className="text-xl font-bold text-white mb-2">
+              {t("favorites.emptyFile")}
+            </h3>
             <p className="text-white/50 text-sm leading-relaxed mb-6">
-              {t('favorites.emptySubtitle')}
+              {t("favorites.emptySubtitle")}
             </p>
             <Link
               to="/"
               className="bg-[#00e5ff]/10 border border-[#00e5ff]/30 text-[#00e5ff] hover:bg-[#00e5ff] hover:text-black font-bold py-3 px-8 rounded-lg transition-all uppercase tracking-widest text-xs"
             >
-              {t('favorites.exploreButton')}
+              {t("favorites.exploreButton")}
             </Link>
           </div>
         ) : (
