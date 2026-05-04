@@ -175,7 +175,12 @@ export default function Detalles() {
                       : t('details.addToFavorites')}
                   </button>
 
-                  <button className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-3">
+                  <Link
+                    to={`https://listado.mercadolibre.com.ar/${encodeURIComponent(producto.name)}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-3"
+                  >
                     <svg
                       className="w-5 h-5 text-white/60"
                       fill="none"
@@ -189,16 +194,10 @@ export default function Detalles() {
                         d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                       />
                     </svg>
-                    <Link
-                      to={`https://listado.mercadolibre.com.ar/${encodeURIComponent(producto.name)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <span className="hidden md:inline text-sm">
-                        {t('details.searchInStores')}
-                      </span>
-                    </Link>
-                  </button>
+                    <span className="hidden md:inline text-sm">
+                      {t('details.searchInStores')}
+                    </span>
+                  </Link>
                 </div>
 
                 <div className="space-y-8">
