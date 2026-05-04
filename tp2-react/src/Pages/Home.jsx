@@ -18,6 +18,7 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const observer = useRef();
   const [filters, setFilters] = useState([]);
+  const [showScrollTop, setShowScrollTop] = useState(false);
 
 
 const handleFilterChange = (selectedCategories) => {
@@ -84,6 +85,37 @@ const handleFilterChange = (selectedCategories) => {
     document.title = t("nav.home");
   }, [t, i18n.language]);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowScrollTop(window.scrollY > 300);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToTop = () => {
+    const duration = 800; // Duración en ms
+    const start = window.pageYOffset;
+    const startTime = performance.now();
+
+    const easeInOutQuad = (t) => t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+
+    const animateScroll = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      const easedProgress = easeInOutQuad(progress);
+
+      window.scrollTo(0, start * (1 - easedProgress));
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
+  };
+
   return (
     <div
       className="min-h-screen flex flex-col bg-[#050508]"
@@ -135,6 +167,28 @@ const handleFilterChange = (selectedCategories) => {
           </div>
         )}
       </main>
+
+      <button
+        onClick={scrollToTop}
+        className={`fixed bottom-8 right-8 bg-[#00e5ff] hover:bg-[#00e5ff]/80 text-black p-3 rounded-full shadow-lg transition-all duration-300 z-50 ${
+          showScrollTop ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'
+        }`}
+        aria-label="Volver arriba"
+      >
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M5 10l7-7m0 0l7 7m-7-7v18"
+          />
+        </svg>
+      </button>
 
       <Footer />
     </div>
