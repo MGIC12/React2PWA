@@ -53,7 +53,7 @@ export default function FilterButton({ onFilterChange }) {
 
   return (
     // ← flex-col para que dropdown y chips empujen el contenido hacia abajo
-    <div className="flex flex-col gap-2 w-auto items-start">
+    <div className="flex flex-col gap-2 w-auto items-start  z-10">
 
       {/* Fila: barra + botón — esto lo arma BarraBusqueda, acá solo el botón */}
       <button
