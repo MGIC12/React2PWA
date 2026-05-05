@@ -62,7 +62,7 @@ export default function Contacto() {
           <div className="w-full lg:w-3/5 bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
             {/* Mensaje de exito */}
             {enviado && (
-              <div className="absolute inset-0 bg-[#050508]/95 backdrop-blur-sm z-10 flex flex-col items-center justify-center animate-in fade-in duration-300">
+              <div className="absolute inset-0 bg-[#050508]/95 backdrop-blur-sm z-10 flex flex-col items-center justify-center text-center px-6 animate-in fade-in duration-300">
                 <div className="w-20 h-20 bg-[#00e5ff]/20 rounded-full flex items-center justify-center mb-6">
                   <svg
                     className="w-10 h-10 text-[#00e5ff]"
