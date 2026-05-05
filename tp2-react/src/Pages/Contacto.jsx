@@ -48,9 +48,9 @@ export default function Contacto() {
     >
       <Header />
 
-      <main className="grow container mx-auto px-6 md:px-10 py-12 lg:py-20">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-wider">
+      <main className="grow container mx-auto px-6 md:px-10 py-12 lg:py-20 max-w-full">
+        <div className="text-center max-w-full sm:max-w-3xl mx-auto mb-16">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-wider break-words whitespace-normal leading-tight">
             {t('contact.title')} <span className="text-[#00e5ff]">{t('contact.titleHighlight')}</span>
           </h1>
           <p className="text-white/60 text-lg leading-relaxed">
