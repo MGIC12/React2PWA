@@ -48,9 +48,9 @@ export default function Contacto() {
     >
       <Header />
 
-      <main className="grow container mx-auto px-6 md:px-10 py-12 lg:py-20">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-6 tracking-wider">
+      <main className="grow container mx-auto px-6 md:px-10 py-12 lg:py-20 max-w-full">
+        <div className="text-center max-w-full sm:max-w-3xl mx-auto mb-16">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-white mb-6 tracking-wider break-words whitespace-normal leading-tight">
             {t('contact.title')} <span className="text-[#00e5ff]">{t('contact.titleHighlight')}</span>
           </h1>
           <p className="text-white/60 text-lg leading-relaxed">
@@ -62,7 +62,7 @@ export default function Contacto() {
           <div className="w-full lg:w-3/5 bg-white/5 border border-white/10 rounded-2xl p-8 md:p-10 shadow-2xl relative overflow-hidden">
             {/* Mensaje de exito */}
             {enviado && (
-              <div className="absolute inset-0 bg-[#050508]/95 backdrop-blur-sm z-10 flex flex-col items-center justify-center animate-in fade-in duration-300">
+              <div className="absolute inset-0 bg-[#050508]/95 backdrop-blur-sm z-10 flex flex-col items-center justify-center text-center px-6 animate-in fade-in duration-300">
                 <div className="w-20 h-20 bg-[#00e5ff]/20 rounded-full flex items-center justify-center mb-6">
                   <svg
                     className="w-10 h-10 text-[#00e5ff]"
