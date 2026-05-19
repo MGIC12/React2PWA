@@ -6,7 +6,6 @@
 - **Integrantes:**
   - Mariano Germán Infante Contreras - **[FAI-3823]** - Rol: PM / Developer
   - Matías Emiliano Bácsay - **[FAI-4078]** - Rol: Developer
-  - Paloma Stucke - **[FAI-5544]** - Rol: Developer
 - **Profesores:** Agustin Chiarotto / Lucas Margni
 
 ## Descripción del Proyecto
@@ -50,3 +49,25 @@ El proyecto consiste en un catálogo interactivo de Hardware de computación que
    ```bash
    npm run dev
    ```
+
+## Testing
+
+### Librerías Utilizadas
+
+- **[Vitest](https://vitest.dev/):** Utilizado como el motor principal de pruebas. Se eligió Vitest por su integración nativa y transparente con Vite, lo que permite aprovechar la misma configuración del proyecto y lograr una ejecución de pruebas extremadamente rápida.
+- **[React Testing Library](https://testing-library.com/docs/react-testing-library/intro/):** Empleada para evaluar los componentes de React. Esta librería fomenta buenas prácticas al probar los componentes desde la perspectiva del usuario (simulando clicks, buscando por textos o roles de accesibilidad) en lugar de testear detalles de implementación interna.
+- **jsdom:** Entorno de pruebas configurado que simula la estructura de un navegador (DOM) directamente dentro de Node.js.
+
+### Cómo ejecutar las pruebas
+
+Para correr los tests, sigue estos pasos:
+
+1.  Abre una terminal posicionado en el directorio raíz del proyecto.
+2.  Asegúrate de tener todas las dependencias instaladas ejecutando:
+    ```bash
+    npm install
+    ```
+3.  Inicia la suite de testing con el siguiente comando:
+    ```bash
+    npm run test
+    ```
