@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useRef, useCallback } from "react";
-import Header from "../Components/Header/Header";
-import Footer from "../Components/Footer/Footer";
-import BarraBusqueda from "../Components/BarraBusqueda/BarraBusqueda";
-import TarjetaComponente from "../Components/TarjetaComponente/TarjetaComponente";
-import { getAllItems } from "../services/getAllItems";
+import Header from "../../Components/Header/Header";
+import Footer from "../../Components/Footer/Footer";
+import BarraBusqueda from "../../Components/BarraBusqueda/BarraBusqueda";
+import TarjetaComponente from "../../Components/TarjetaComponente/TarjetaComponente";
+import { getAllItems } from "../../services/getAllItems";
 import { Link } from "react-router-dom";
 
 import { useTranslation } from "react-i18next";
