@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getItemById } from "../services/getItemById";
-import Header from "../Components/Header/Header";
-import Footer from "../Components/Footer/Footer";
-import Error404 from "./Error404";
+import { getItemById } from "../../services/getItemById";
+import Header from "../../Components/Header/Header";
+import Footer from "../../Components/Footer/Footer";
+import Error404 from "../Error404/Error404";
 import { useTranslation } from "react-i18next";
 
 export default function Detalles() {
