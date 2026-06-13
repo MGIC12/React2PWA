@@ -22,8 +22,10 @@ export default function FilterButton({ onFilterChange }) {
 
   const toggle = (id) => {
     setSelected((prev) => {
-      const next = new Set();
-      if (!prev.has(id)) {
+      const next = new Set(prev);
+      if (next.has(id)) {
+        next.delete(id);
+      } else {
         next.add(id);
       }
       return next;
