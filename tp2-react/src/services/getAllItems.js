@@ -17,7 +17,11 @@ export const getAllItems = async (page = 1, search = "", filters = []) => {
 
     // Agregamos el parámetro de filtros de categoría
     if (filters && filters.length > 0) {
-      url.searchParams.append("category", filters.join(","));
+      const normalizedCategories = filters
+        .filter(Boolean)
+        .map((category) => category.toUpperCase())
+        .join(",");
+      url.searchParams.append("category", normalizedCategories);
     }
 
     const response = await fetch(url.toString());
