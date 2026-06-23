@@ -1,10 +1,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./Pages/Home";
-import Favoritos from "./Pages/Favoritos";
-import Contacto from "./Pages/Contacto";
-import Acerca from "./Pages/Acerca";
-import Detalles from "./Pages/Detalles";
-import Error404 from "./Pages/Error404";
+import Home from "./Pages/Home/Home";
+import Favoritos from "./Pages/Favoritos/Favoritos";
+import Contacto from "./Pages/Contacto/Contacto";
+import Acerca from "./Pages/Acerca/Acerca";
+import Detalles from "./Pages/Detalles/Detalles";
+import Error404 from "./Pages/Error404/Error404";
 import Registrarse from "./Pages/Registrarse";
 import IniciarSesion from "./Pages/IniciarSesion";
 import "./App.css";
