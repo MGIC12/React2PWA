@@ -3,7 +3,9 @@
     "home": "Inicio",
     "favorites": "Favoritos",
     "about": "Acerca de",
-    "contact": "Contacto"
+    "contact": "Contacto",
+    "signin": "Iniciar Sesion",
+    "register": "registrarse"
   },
 
   "barraBusqueda": {
@@ -109,5 +111,31 @@
     "pillar2Desc": "Utiliza nuestro sistema de favoritos para guardar las piezas que te interesan y compáralas de forma sencilla para tomar la mejor decisión.",
     "pillar3Title": "Para la Comunidad",
     "pillar3Desc": "Desarrollado como una herramienta libre (Proyecto BACINSTU V1.0) para que cualquier entusiasta del PC Master Race tenga acceso rápido a la información."
+  },
+  "register": {
+    "namePlaceholder": "Ej. John Doe",
+    "nameLabel": "Nombre",
+    "emailPlaceholder": "correo@ejemplo.com",
+    "emailLabel": "Correo",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "********",
+    "confirmPasswordLabel": "Confirmar Contraseña",
+    "confirmPasswordPlaceholder": "********",
+    "loginMessage": "¿Ya tiene cuenta?",
+    "loginLink": "Iniciar Sesion",
+    "title": "REGISTRARSE",
+    "submitBtn": "Continuar",
+    "sendingBtn": "Resgistrando..."
+  },
+  "signin": {
+    "title": "Iniciar Sesion",
+    "emailPlaceholder": "correo@ejemplo.com",
+    "emailLabel": "Correo",
+    "passwordLabel": "Contraseña",
+    "passwordPlaceholder": "********",
+    "loginMessage": "¿No tiene cuenta?",
+    "loginLink": "Registrarse",
+    "submitBtn": "Continuar",
+    "sendingBtn": "Iniciandp sesion..."
   }
 }

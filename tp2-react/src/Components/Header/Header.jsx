@@ -1,16 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Navegacion from "../Navegacion/Navegacion";
 import { useTranslation } from 'react-i18next';
+import { Link } from "react-router-dom";
 
 export default function Header() {
   // Estado para controlar si el menú está abierto o cerrado
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isLoginMenuOpen, setIsLoginMenuOpen] = useState(false);
+  const loginMenuTimeout = useRef(null);
 
   const { t, i18n } = useTranslation();
 
   const cambiarIdioma = (lng) => {
     i18n.changeLanguage(lng);
     };
+
+  const openLoginMenu = () => {
+    if (loginMenuTimeout.current) {
+      clearTimeout(loginMenuTimeout.current);
+      loginMenuTimeout.current = null;
+    }
+    setIsLoginMenuOpen(true);
+  };
+
+  const closeLoginMenu = () => {
+    if (loginMenuTimeout.current) {
+      clearTimeout(loginMenuTimeout.current);
+    }
+    loginMenuTimeout.current = setTimeout(() => {
+      setIsLoginMenuOpen(false);
+      loginMenuTimeout.current = null;
+    }, 200);
+  };
 
   // Función para alternar el menú
   const toggleMenu = () => {
@@ -88,6 +109,51 @@ export default function Header() {
               EN
             </button>
           </div>
+          {/* login */}
+          <div
+            className="relative"
+            onMouseEnter={openLoginMenu}
+            onMouseLeave={closeLoginMenu}
+          >
+            <div className="w-0.5 h-6 bg-white/20 absolute left-0 top-1/2 -translate-y-1/2" />
+            <div className="relative ml-4">
+              <Link
+                to="/iniciar-sesion"
+                className="text-white/80 hover:text-white transition-colors duration-200 inline-flex items-center"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="w-6 h-6"
+                >
+                  <path d="M9 10a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                  <path d="M6 21v-1a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v1" />
+                  <path d="M3 5a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v14a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-14z" />
+                </svg>
+              </Link>
+              <div className={`absolute right-0 mt-2 ${isLoginMenuOpen ? 'flex' : 'hidden'} min-w-[180px] flex-col gap-1 rounded-xl border border-white/10 bg-[#0b0c10]/95 p-3 text-left text-sm shadow-lg shadow-black/30 pointer-events-auto`}>
+                <Link
+                  to="/iniciar-sesion"
+                  className="block rounded-lg px-3 py-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+                >
+                  Iniciar sesión
+                </Link>
+                <Link
+                  to="/registrarse"
+                  className="block rounded-lg px-3 py-2 text-white/80 hover:bg-white/10 hover:text-white transition-colors"
+                >
+                  Registrarse
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
       </nav>
       <div
@@ -105,6 +171,9 @@ export default function Header() {
           <Navegacion direccion="/favoritos" label={t('nav.favorites')} />
           <Navegacion direccion="/contacto" label={t('nav.contact')} />
           <Navegacion direccion="/acerca" label={t('nav.about')} />
+          <Navegacion direccion="/iniciar-sesion" label={t('nav.signin')} />
+        </div>
+        <div className="flex items-center gap-4 mt-8 border-t border-white/10 pt-8 w-1/2 justify-center">
         </div>
         <div className="flex items-center gap-4 mt-8 border-t border-white/10 pt-8 w-1/2 justify-center">
           <button 
