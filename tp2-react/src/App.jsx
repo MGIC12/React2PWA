@@ -5,8 +5,8 @@ import Contacto from "./Pages/Contacto/Contacto";
 import Acerca from "./Pages/Acerca/Acerca";
 import Detalles from "./Pages/Detalles/Detalles";
 import Error404 from "./Pages/Error404/Error404";
-import Registrarse from "./Pages/Registrarse";
-import IniciarSesion from "./Pages/IniciarSesion";
+import Registrarse from "./Pages/Registrarse/Registrarse";
+import IniciarSesion from "./Pages/IniciarSesion/IniciarSesion";
 import "./App.css";
 import './js/i18n' // Importa la configuración de i18n
 

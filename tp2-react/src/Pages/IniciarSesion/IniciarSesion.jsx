@@ -1,8 +1,8 @@
 import React from 'react'
 import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import Header from '../Components/Header/Header';
-import Footer from '../Components/Footer/Footer';
+import Header from '../../Components/Header/Header';
+import Footer from '../../Components/Footer/Footer';
 import { Link } from 'react-router-dom';
 
 export default function IniciarSesion() {
