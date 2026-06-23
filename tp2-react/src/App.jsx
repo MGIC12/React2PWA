@@ -5,6 +5,8 @@ import Contacto from "./Pages/Contacto/Contacto";
 import Acerca from "./Pages/Acerca/Acerca";
 import Detalles from "./Pages/Detalles/Detalles";
 import Error404 from "./Pages/Error404/Error404";
+import Registrarse from "./Pages/Registrarse";
+import IniciarSesion from "./Pages/IniciarSesion";
 import "./App.css";
 import './js/i18n' // Importa la configuración de i18n
 
@@ -17,6 +19,8 @@ function App() {
         <Route path="/items/:id" element={<Detalles />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/acerca" element={<Acerca />} />
+        <Route path="/registrarse" element={<Registrarse />} />
+        <Route path="/iniciar-sesion" element={<IniciarSesion />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </BrowserRouter>
