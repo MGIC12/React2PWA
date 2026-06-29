@@ -1,13 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getItemById } from "../../services/getItemById";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import Error404 from "../Error404/Error404";
 import { useTranslation } from "react-i18next";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Detalles() {
   const { id } = useParams();
+  const authContext = useContext(AuthContext);
+  const token = authContext?.token ?? null;
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
   const { t } = useTranslation();
@@ -25,32 +28,82 @@ export default function Detalles() {
         setError404(true);
       } else {
         setProducto(data);
-        const favoritosGuardados =
-          JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
-        const existe = favoritosGuardados.some((fav) => fav.id === data.id);
-        setEsFavorito(existe);
+
+        if (token) {
+          try {
+            const response = await fetch("http://localhost:3000/favorites", {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            });
+
+            if (response.ok) {
+              const favoritosDesdeApi = await response.json();
+              const lista = Array.isArray(favoritosDesdeApi)
+                ? favoritosDesdeApi
+                : favoritosDesdeApi.favorites || [];
+              const existeEnApi = lista.some(
+                (fav) => String(fav.id ?? fav._id ?? fav.productId) === String(data.id),
+              );
+              setEsFavorito(existeEnApi);
+            } else {
+              setEsFavorito(false);
+            }
+          } catch (error) {
+            console.error(error);
+            setEsFavorito(false);
+          }
+        } else {
+          const favoritosGuardados =
+            JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+          const existe = favoritosGuardados.some((fav) => fav.id === data.id);
+          setEsFavorito(existe);
+        }
       }
       setCargando(false);
     };
 
     obtenerDatos();
     document.title = t('details.title');
-  }, [id]);
+  }, [id, token, t]);
 
-  const toggleFavorito = () => {
-    let favoritosGuardados =
-      JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+  const toggleFavorito = async () => {
+    if (!producto) return;
 
-    if (esFavorito) {
-      favoritosGuardados = favoritosGuardados.filter(
-        (fav) => fav.id !== producto.id,
-      );
-      setEsFavorito(false);
-    } else {
-      favoritosGuardados.push(producto);
-      setEsFavorito(true);
+    if (!token) {
+      let favoritosGuardados =
+        JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+
+      if (esFavorito) {
+        favoritosGuardados = favoritosGuardados.filter(
+          (fav) => fav.id !== producto.id,
+        );
+        setEsFavorito(false);
+      } else {
+        favoritosGuardados.push(producto);
+        setEsFavorito(true);
+      }
+      localStorage.setItem("nexus_favoritos", JSON.stringify(favoritosGuardados));
+      return;
     }
-    localStorage.setItem("nexus_favoritos", JSON.stringify(favoritosGuardados));
+
+    try {
+      const method = esFavorito ? "DELETE" : "POST";
+      const response = await fetch(`http://localhost:3000/favorites/${producto.id}`, {
+        method,
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error("No se pudo actualizar el favorito");
+      }
+
+      setEsFavorito(!esFavorito);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   if (error404) return <Error404 />;

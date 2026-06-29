@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import Header from "../Components/Header/Header";
-import Footer from "../Components/Footer/Footer";
+import Header from "../../Components/Header/Header";
+import Footer from "../../Components/Footer/Footer";
 import { Link, useNavigate } from "react-router-dom";
 
 export default function Registrarse() {
