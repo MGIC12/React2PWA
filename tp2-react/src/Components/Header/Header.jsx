@@ -1,9 +1,13 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useContext } from "react";
 import Navegacion from "../Navegacion/Navegacion";
 import { useTranslation } from 'react-i18next';
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Header() {
+  const authContext = useContext(AuthContext);
+  const user = authContext?.user ?? null;
+  const logout = authContext?.logout ?? (() => {});
   // Estado para controlar si el menú está abierto o cerrado
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLoginMenuOpen, setIsLoginMenuOpen] = useState(false);
@@ -110,6 +114,48 @@ export default function Header() {
             </button>
           </div>
           {/* login */}
+          {user ? (
+            <div
+              className="relative"
+              onMouseEnter={openLoginMenu}
+              onMouseLeave={closeLoginMenu}
+            >
+              <button
+                type="button"
+                className="flex items-center gap-2 rounded-full border border-white/10 bg-white/10 px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-white/20"
+                aria-label={`Perfil de ${user.name}`}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="20"
+                  height="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth={2}
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="h-5 w-5"
+                >
+                  <path d="M9 10a3 3 0 1 0 6 0a3 3 0 0 0 -6 0" />
+                  <path d="M6 21v-1a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v1" />
+                </svg>
+                <span>Hola, {user.name}</span>
+              </button>
+              <div
+                className={`absolute right-0 mt-2 ${isLoginMenuOpen ? "flex" : "hidden"} min-w-[180px] flex-col gap-1 rounded-xl border border-white/10 bg-[#0b0c10]/95 p-3 text-left text-sm shadow-lg shadow-black/30 pointer-events-auto`}
+              >
+                <button
+                  type="button"
+                  onClick={logout}
+                  className="rounded-lg px-3 py-2 text-left text-white/80 transition-colors hover:bg-white/10 hover:text-white"
+                  aria-label="Cerrar sesión"
+                >
+                  Cerrar sesión
+                </button>
+              </div>
+            </div>
+          ) : (
           <div
             className="relative"
             onMouseEnter={openLoginMenu}
@@ -153,7 +199,7 @@ export default function Header() {
                 </Link>
               </div>
             </div>
-          </div>
+          </div>)}
         </div>
       </nav>
       <div
@@ -168,7 +214,9 @@ export default function Header() {
           onClick={toggleMenu}
         >
           <Navegacion direccion="/" label={t('nav.home')} />
-          <Navegacion direccion="/favoritos" label={t('nav.favorites')} />
+          {user ? (
+            <Navegacion direccion="/favoritos" label={t('nav.favorites')} />
+          ) : null}
           <Navegacion direccion="/contacto" label={t('nav.contact')} />
           <Navegacion direccion="/acerca" label={t('nav.about')} />
           <Navegacion direccion="/iniciar-sesion" label={t('nav.signin')} />

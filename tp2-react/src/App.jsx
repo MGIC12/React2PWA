@@ -7,15 +7,26 @@ import Detalles from "./Pages/Detalles/Detalles";
 import Error404 from "./Pages/Error404/Error404";
 import Registrarse from "./Pages/Registrarse/Registrarse";
 import IniciarSesion from "./Pages/IniciarSesion/IniciarSesion";
+
+import { useContext } from "react";
+import { AuthContext } from "./context/AuthContext";
 import "./App.css";
 import './js/i18n' // Importa la configuración de i18n
 
 function App() {
+  const { user } = useContext(AuthContext);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/favoritos" element={<Favoritos />} />
+
+        {user ? (
+          <Route path="/favoritos" element={<Favoritos />} />
+        ) : (
+          <Route path="/favoritos" element={<IniciarSesion />} />
+        )}
+        
         <Route path="/items/:id" element={<Detalles />} />
         <Route path="/contacto" element={<Contacto />} />
         <Route path="/acerca" element={<Acerca />} />
