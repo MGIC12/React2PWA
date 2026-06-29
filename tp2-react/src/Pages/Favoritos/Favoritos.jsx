@@ -15,37 +15,37 @@ export default function Favoritos() {
 
   useEffect(() => {
     const cargarFavoritos = async () => {
-  if (!user || !token) {
-    setFavoritos([]);
-    document.title = t("favorites.h1");
-    return;
-  }
+      if (!user || !token) {
+        const guardados = JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+        setFavoritos(guardados);
+        document.title = t("favorites.h1");
+        return;
+      }
 
-  try {
-    const response = await fetch("http://localhost:3000/favorites", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+      try {
+        const response = await fetch("http://localhost:3000/favorites", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
 
-    if (!response.ok) {
-      throw new Error("No se pudieron cargar los favoritos");
-    }
+        if (!response.ok) {
+          throw new Error("No se pudieron cargar los favoritos");
+        }
 
-    const data = await response.json();
-    
-    // CORRECCIÓN 1: Como 'data' ya es el array de favoritos, lo extraemos directamente.
-    // Además, transformamos el array para quedarnos únicamente con la info del 'item' que está dentro.
-    const itemsFavoritos = data.map(fav => fav.item);
-    
-    setFavoritos(itemsFavoritos);
-  } catch (error) {
-    console.error(error);
-    setFavoritos([]);
-  }
+        const data = await response.json();
+        const favoritosApi = Array.isArray(data) ? data : data.favorites || [];
+        const itemsFavoritos = favoritosApi.map((fav) => fav.item ?? fav);
 
-  document.title = t("favorites.h1");
-};
+        setFavoritos(itemsFavoritos);
+      } catch (error) {
+        console.error(error);
+        const guardados = JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+        setFavoritos(guardados);
+      }
+
+      document.title = t("favorites.h1");
+    };
 
     cargarFavoritos();
   }, [user, token, t, i18n.language]);
