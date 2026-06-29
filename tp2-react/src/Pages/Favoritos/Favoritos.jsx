@@ -1,20 +1,54 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
 import Header from "../../Components/Header/Header";
 import Footer from "../../Components/Footer/Footer";
 import TarjetaComponente from "../../Components/TarjetaComponente/TarjetaComponente";
 import { useTranslation } from "react-i18next";
+import { AuthContext } from "../../context/AuthContext";
 
 export default function Favoritos() {
   const { t, i18n } = useTranslation();
   const [favoritos, setFavoritos] = useState([]);
+  const authContext = useContext(AuthContext);
+  const user = authContext?.user ?? null;
+  const token = authContext?.token ?? null;
 
   useEffect(() => {
-    const favoritosGuardados =
-      JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
-    setFavoritos(favoritosGuardados);
+    const cargarFavoritos = async () => {
+  if (!user || !token) {
+    setFavoritos([]);
     document.title = t("favorites.h1");
-  }, [t, i18n.language]);
+    return;
+  }
+
+  try {
+    const response = await fetch("http://localhost:3000/favorites", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error("No se pudieron cargar los favoritos");
+    }
+
+    const data = await response.json();
+    
+    // CORRECCIÓN 1: Como 'data' ya es el array de favoritos, lo extraemos directamente.
+    // Además, transformamos el array para quedarnos únicamente con la info del 'item' que está dentro.
+    const itemsFavoritos = data.map(fav => fav.item);
+    
+    setFavoritos(itemsFavoritos);
+  } catch (error) {
+    console.error(error);
+    setFavoritos([]);
+  }
+
+  document.title = t("favorites.h1");
+};
+
+    cargarFavoritos();
+  }, [user, token, t, i18n.language]);
 
   return (
     <div
