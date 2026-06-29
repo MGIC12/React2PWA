@@ -35,7 +35,7 @@ export default function IniciarSesion() {
 
     try {
       // Petición POST al endpoint de login
-      const response = await fetch("http://localhost:3000/auth/login", {
+      const response = await fetch("https://react3-pwa.vercel.app/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
