@@ -13,6 +13,7 @@ export default function Detalles() {
   const token = authContext?.token ?? null;
   const [producto, setProducto] = useState(null);
   const [cargando, setCargando] = useState(true);
+  const [cargandoFav, setCargandoFav] = useState(false);
   const { t } = useTranslation();
   const [error404, setError404] = useState(false);
   const [errorImagen, setErrorImagen] = useState(false);
@@ -32,9 +33,7 @@ export default function Detalles() {
         if (token) {
           try {
             const response = await fetch("http://localhost:3000/favorites", {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
+              headers: { Authorization: `Bearer ${token}` },
             });
 
             if (response.ok) {
@@ -42,8 +41,9 @@ export default function Detalles() {
               const lista = Array.isArray(favoritosDesdeApi)
                 ? favoritosDesdeApi
                 : favoritosDesdeApi.favorites || [];
+                
               const existeEnApi = lista.some(
-                (fav) => String(fav.id ?? fav._id ?? fav.productId) === String(data.id),
+                (fav) => String(fav.itemId) === String(data.id)
               );
               setEsFavorito(existeEnApi);
             } else {
@@ -54,9 +54,8 @@ export default function Detalles() {
             setEsFavorito(false);
           }
         } else {
-          const favoritosGuardados =
-            JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
-          const existe = favoritosGuardados.some((fav) => fav.id === data.id);
+          const favoritosGuardados = JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+          const existe = favoritosGuardados.some((fav) => String(fav.id) === String(data.id));
           setEsFavorito(existe);
         }
       }
@@ -69,21 +68,20 @@ export default function Detalles() {
 
   const toggleFavorito = async () => {
     if (!producto) return;
+    setCargandoFav(true);
 
     if (!token) {
-      let favoritosGuardados =
-        JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
+      let favoritosGuardados = JSON.parse(localStorage.getItem("nexus_favoritos")) || [];
 
       if (esFavorito) {
-        favoritosGuardados = favoritosGuardados.filter(
-          (fav) => fav.id !== producto.id,
-        );
+        favoritosGuardados = favoritosGuardados.filter((fav) => String(fav.id) !== String(producto.id));
         setEsFavorito(false);
       } else {
         favoritosGuardados.push(producto);
         setEsFavorito(true);
       }
       localStorage.setItem("nexus_favoritos", JSON.stringify(favoritosGuardados));
+      setCargandoFav(false);
       return;
     }
 
@@ -91,9 +89,7 @@ export default function Detalles() {
       const method = esFavorito ? "DELETE" : "POST";
       const response = await fetch(`http://localhost:3000/favorites/${producto.id}`, {
         method,
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
+        headers: { Authorization: `Bearer ${token}` },
       });
 
       if (!response.ok) {
@@ -103,16 +99,15 @@ export default function Detalles() {
       setEsFavorito(!esFavorito);
     } catch (error) {
       console.error(error);
+    } finally {
+      setCargandoFav(false);
     }
   };
 
   if (error404) return <Error404 />;
 
   return (
-    <div
-      className="min-h-screen flex flex-col bg-[#050508]"
-      style={{ fontFamily: "'Inter', sans-serif" }}
-    >
+    <div className="min-h-screen flex flex-col bg-[#050508]" style={{ fontFamily: "'Inter', sans-serif" }}>
       <Header />
 
       <main className="grow container mx-auto px-6 md:px-10 py-12">
@@ -125,22 +120,9 @@ export default function Detalles() {
           </div>
         ) : (
           <div className="max-w-6xl mx-auto">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-2 text-white/50 hover:text-[#00e5ff] transition-colors mb-8 text-sm font-bold uppercase tracking-widest"
-            >
-              <svg
-                className="w-4 h-4"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 19l-7-7m0 0l7-7m-7 7h18"
-                />
+            <Link to="/" className="inline-flex items-center gap-2 text-white/50 hover:text-[#00e5ff] transition-colors mb-8 text-sm font-bold uppercase tracking-widest">
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
               </svg>
               {t('details.backToHome')}
             </Link>
@@ -152,39 +134,16 @@ export default function Detalles() {
 
                 {errorImagen ? (
                   <div className="flex flex-col items-center justify-center text-[#5a5a78]">
-                    <svg
-                      className="w-16 h-16 opacity-50 mb-4"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={1.5}
-                        d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                      />
-                      <line
-                        x1="3"
-                        y1="3"
-                        x2="21"
-                        y2="21"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                      />
+                    <svg className="w-16 h-16 opacity-50 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                      <line x1="3" y1="3" x2="21" y2="21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                     </svg>
                     <span className="text-sm font-bold tracking-widest uppercase">
                       {t('details.imgError')}
                     </span>
                   </div>
                 ) : (
-                  <img
-                    src={producto.image}
-                    alt={producto.name}
-                    className="max-w-full h-auto object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.15)]"
-                    onError={() => setErrorImagen(true)}
-                  />
+                  <img src={producto.image} alt={producto.name} className="max-w-full h-auto object-contain drop-shadow-[0_0_30px_rgba(0,229,255,0.15)]" onError={() => setErrorImagen(true)} />
                 )}
               </div>
 
@@ -204,48 +163,29 @@ export default function Detalles() {
                 <div className="flex flex-col sm:flex-row items-center gap-4 mb-10 pb-10 border-b border-white/10">
                   <button
                     onClick={toggleFavorito}
+                    disabled={cargandoFav}
                     className={`w-full sm:w-auto grow border-2 border-[#00e5ff] font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center gap-3 group ${
+                      cargandoFav ? "opacity-50 cursor-not-allowed" : ""
+                    } ${
                       esFavorito
                         ? "bg-[#00e5ff] text-black hover:bg-transparent hover:text-[#00e5ff]"
                         : "bg-transparent text-[#00e5ff] hover:bg-[#00e5ff] hover:text-black"
                     }`}
                   >
-                    <svg
-                      className={`w-6 h-6 group-hover:scale-110 transition-transform ${esFavorito ? "fill-current" : ""}`}
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                      />
+                    <svg className={`w-6 h-6 group-hover:scale-110 transition-transform ${esFavorito ? "fill-current" : ""}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                     </svg>
-                    {esFavorito
-                      ? t('details.removeFromFavorites')
-                      : t('details.addToFavorites')}
+                    {cargandoFav 
+                      ? "..."
+                      : esFavorito
+                        ? t('details.removeFromFavorites')
+                        : t('details.addToFavorites')
+                    }
                   </button>
 
-                  <Link
-                    to={`https://listado.mercadolibre.com.ar/${encodeURIComponent(producto.name)}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-3"
-                  >
-                    <svg
-                      className="w-5 h-5 text-white/60"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                      />
+                  <Link to={`https://listado.mercadolibre.com.ar/${encodeURIComponent(producto.name)}`} target="_blank" rel="noopener noreferrer" className="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-white border border-white/10 font-bold py-3 px-6 rounded-lg transition-all flex items-center justify-center gap-3">
+                    <svg className="w-5 h-5 text-white/60" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                     </svg>
                     <span className="hidden md:inline text-sm">
                       {t('details.searchInStores')}
@@ -270,19 +210,14 @@ export default function Detalles() {
                     </h3>
                     <div className="bg-white/5 p-6 rounded-xl border border-white/5">
                       <ul className="flex flex-col gap-3">
-                        {producto.technicalSpecs
-                          .split(",")
-                          .map((spec, index) => (
-                            <li
-                              key={index}
-                              className="flex items-start gap-3 text-white/90 font-mono"
-                            >
-                              <span className="text-[#00e5ff] mt-0.5">▹</span>
-                              <span className="leading-relaxed">
-                                {spec.trim()}
-                              </span>
-                            </li>
-                          ))}
+                        {producto.technicalSpecs.split(",").map((spec, index) => (
+                          <li key={index} className="flex items-start gap-3 text-white/90 font-mono">
+                            <span className="text-[#00e5ff] mt-0.5">▹</span>
+                            <span className="leading-relaxed">
+                              {spec.trim()}
+                            </span>
+                          </li>
+                        ))}
                       </ul>
                     </div>
                   </section>
