@@ -32,7 +32,7 @@ export default function Detalles() {
 
         if (token) {
           try {
-            const response = await fetch("http://localhost:3000/favorites", {
+            const response = await fetch("https://react3-pwa.vercel.app/favorites", {
               headers: { Authorization: `Bearer ${token}` },
             });
 
@@ -87,7 +87,7 @@ export default function Detalles() {
 
     try {
       const method = esFavorito ? "DELETE" : "POST";
-      const response = await fetch(`http://localhost:3000/favorites/${producto.id}`, {
+      const response = await fetch(`https://react3-pwa.vercel.app/favorites/${producto.id}`, {
         method,
         headers: { Authorization: `Bearer ${token}` },
       });

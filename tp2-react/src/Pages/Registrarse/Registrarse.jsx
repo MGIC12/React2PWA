@@ -44,7 +44,7 @@ export default function Registrarse() {
 
     try {
       // Petición real al backend
-      const response = await fetch("http://localhost:3000/auth/register", {
+      const response = await fetch("https://react3-pwa.vercel.app/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
