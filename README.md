@@ -12,7 +12,9 @@
 
 Esta aplicación es una Single Page Application (SPA) desarrollada con **React** y estilizada con **Tailwind CSS**.
 
-El proyecto consiste en un catálogo interactivo de Hardware de computación que consume datos desde una API REST simulada utilizando MockAPI.
+El proyecto consiste en un catálogo interactivo de Hardware de computación que consume datos desde una base de datos deployada en Neon.
+
+Deploy del proyecto: https://pwa-react2-bacinstu.netlify.app/
 
 ### Características Principales:
 
@@ -28,7 +30,7 @@ El proyecto consiste en un catálogo interactivo de Hardware de computación que
 - **Enrutamiento:** React Router DOM
 - **Estilos:** Tailwind CSS
 - **Internacionalización:** react-i18next
-- **API:** MockAPI
+- **Base de datos:** Prisma ORM
 - **Gestión de Tareas:** GitHub Projects (Kanban)
 
 ## Guía de Instalación y Ejecución
